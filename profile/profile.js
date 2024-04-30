@@ -16,7 +16,7 @@ function handleSubmit(event) {
 		password: document.getElementById("password").value,
 	}
 	let usernameRegex = /^[a-z0-9]+$/
-	let passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{4,12}$/
+	let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{4,}$/
 	if (!obj.username) {
 		isSuccess = false
 		document.getElementById("errorusername").innerText = "* Please enter username";
@@ -39,19 +39,25 @@ function handleSubmit(event) {
 		isSuccess = true
 		document.getElementById("errorpasssword").innerText = "";
 	}
-	if (isSuccess) {
-		localStorage.setItem('details', JSON.stringify(obj))
-	}
-	let getDetails = JSON.parse(localStorage.getItem('details'))
+	// if (isSuccess) {
+	// }
+	document.getElementById('sign-in-form').reset()
 	let getNewUserData = JSON.parse(localStorage.getItem('newUserData'))
-	if (isSuccess) {
-		if (getDetails.username !== getNewUserData.username) {
-			document.getElementById('success').innerText = 'You are not connected with us :('
-		} else if (getDetails.password !== getNewUserData.password) {
-			document.getElementById('success').innerText = 'You are not connected with us :('
+	if (!localStorage.getItem('newUserData')) {
+		alert('You should Sign Up First')
+	} else {
+		if (!getNewUserData.username && !getNewUserData.password) {
+			alert('No Login Details Found')
 		}
-		else {
-			document.getElementById('success').innerText = 'Sign in Successfull :)'
+		if (isSuccess) {
+			if (obj.username !== getNewUserData.username) {
+				document.getElementById('success').innerText = 'You are not connected with us :('
+			} else if (obj.password !== getNewUserData.password) {
+				document.getElementById('success').innerText = 'You are not connected with us :('
+			}
+			else {
+				document.getElementById('success').innerText = 'Sign in Successfull :)'
+			}
 		}
 	}
 
@@ -64,7 +70,7 @@ function handleSubmit1(event) {
 		password: document.getElementById("password1").value,
 	}
 	let usernameRegex = /^[a-z0-9]+$/
-	let passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{4,12}$/
+	let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{4,}$/
 	if (!obj1.username) {
 		isSuccess = false
 		document.getElementById("errorusername1").innerText = "* Please enter username";
@@ -96,7 +102,8 @@ function handleSubmit1(event) {
 		document.getElementById("errorpassword1").innerText = "";
 	}
 	if (isSuccess) {
-		// console.log(obj1);
 		localStorage.setItem('newUserData', JSON.stringify(obj1))
+		// document.getElementsByClassName('.sign-up-form').reset()
+		document.getElementById('sign-up-form').reset()
 	}
 }
