@@ -9,6 +9,7 @@
 	height: 50px;
 	width: 100%;
 	background-color: #0D1B2A;
+	transition: 0.5s ease;
 	position: relative;
 }
 
@@ -182,7 +183,7 @@
 		min-width: 275px;
 		max-height: 400px;
 		font-size: xx-small;
-		margin-top: 70	px;
+		margin-top: 70 px;
 		padding: 15px;
 	}
 
@@ -217,4 +218,6 @@ div>h6>a:hover {
 	color: #E0E1DD;
 	text-decoration: none;
 }
+
+
 

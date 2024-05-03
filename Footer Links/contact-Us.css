@@ -9,6 +9,7 @@
     height: 50px;
     width: 100%;
     background-color: #0D1B2A;
+    transition: 0.5s ease;
     position: relative;
 }
 
@@ -137,7 +138,7 @@
     background: #1B263B;
     color: #E0E1DD;
     border: 0;
-    border-radius: 10px;
+    border-radius: 10px;    
 }
 
 .contact button.btn {
@@ -185,3 +186,10 @@
     font-weight: 300;
     color: #E0E1DD;
 }
+
+
+
+
+
+
+

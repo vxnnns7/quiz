@@ -107,3 +107,52 @@ function handleSubmit1(event) {
 		document.getElementById('sign-up-form').reset()
 	}
 }
+
+
+
+
+
+// Theme Mode
+const toggleSwitch = document.getElementById('modeToggle');
+
+// Function to set theme based on toggle state
+function setTheme(theme) {
+	if (theme === 'dark') {
+		document.body.style.backgroundColor = '#000';
+		document.querySelector('.nav').style.backgroundColor = '#000';
+		document.querySelector('.container').style.backgroundColor = '#000';
+		document.querySelector('.title').style.color = '#fff';
+		document.querySelector('.social-text').style.color = '#fff';
+		document.querySelectorAll('[class^="social-icon"]').forEach(icon => {
+			icon.style.color = '#fff';
+			icon.style.borderColor = '#fff';
+		});
+		document.querySelector('.up').style.color = '#fff';
+	} else {
+		document.body.style.backgroundColor = '#0D1B2A';
+		document.querySelector('.nav').style.backgroundColor = '#0D1B2A';
+		document.querySelector('.container').style.backgroundColor = '#fff';
+		document.querySelector('.title').style.color = '#0D1B2A';
+		document.querySelectorAll('[class^="social-icon"]').forEach(icon => {
+			icon.style.color = '#0D1B2A';
+			icon.style.borderColor = '#0D1B2A';
+		});
+
+		document.querySelector('.up').style.color = '#0D1B2A';
+	}
+}
+
+// Function to toggle theme
+function toggleTheme() {
+	if (toggleSwitch.checked) {
+		setTheme('dark');
+	} else {
+		setTheme('light');
+	}
+}
+
+// Event listener for theme toggle
+toggleSwitch.addEventListener('change', toggleTheme);
+
+// Set theme on initial load
+setTheme('light');

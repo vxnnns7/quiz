@@ -10,6 +10,7 @@
 	width: 100%;
 	background-color: #0D1B2A;
 	position: relative;
+	transition: 0.5s ease;
 }
 
 .nav>.nav-header {
@@ -119,3 +120,6 @@ div>h6>a:hover {
 	color: #E0E1DD;
 	text-decoration: none;
 }
+
+
+

@@ -89,7 +89,7 @@ function displayTutorials() {
 	str = ''
 	objofTutorials.map((v) => {
 		str += `<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3">
-		<div class="card p-3" style="max-width: 540px;background-color: #415A77;">
+		<div class="card p-3 tutorial" style="max-width: 540px;background-color: #415A77;">
 			<div class="row g-0">
 				<div class="col-md-4">
 					<iframe src="${v.src}"
@@ -109,3 +109,39 @@ function displayTutorials() {
 	document.getElementById('tutorial').innerHTML = str
 }
 displayTutorials()
+
+
+
+// Theme Mode
+const toggleSwitch = document.getElementById('modeToggle');
+
+// Function to set theme based on toggle state
+function setTheme(theme) {
+	if (theme === 'dark') {
+		document.body.style.backgroundColor = '#000';
+		document.querySelector('.nav').style.backgroundColor = '#000';
+		document.querySelector('.footer').style.backgroundColor = '#1d1818';
+		document.querySelector('.tutorial').style.backgroundColor = '#1d1818';
+	} else {
+		document.body.style.backgroundColor = '#0D1B2A';
+		document.querySelector('.nav').style.backgroundColor = '#0D1B2A';
+		document.querySelector('.footer').style.backgroundColor = '#1B263B';
+		document.querySelector('.tutorial').style.backgroundColor = '#415A77';
+	}
+}
+
+// Function to toggle theme
+function toggleTheme() {
+	if (toggleSwitch.checked) {
+		setTheme('dark');
+	} else {
+		setTheme('light');
+	}
+}
+
+// Event listener for theme toggle
+toggleSwitch.addEventListener('change', toggleTheme);
+
+// Set theme on initial load
+setTheme('light');
+

@@ -89,9 +89,9 @@ function displayData() {
     let str = ''
     objofLanguages.map((v) => {
         str += `<div class="col mb-4">
-    <div class="card" style="background-color: #1B263B; color: #E0E1DD; height: 100%;padding: 10px" onclick="${v.link}">
+    <div class="card card-bg" style="background-color:#1B263B;color: #E0E1DD; height: 100%;padding: 10px" onclick="${v.link}">
         <img src="${v.img}" class="card-img-top" alt="...">
-        <div class="card-body mt-3">
+        <div class="card-body mt-3 card-bg">
             <h5 class="card-title text-center">${v.title}</h5>
             <p class="card-text text-center lh-base">${v.description}</p>
         </div>
@@ -171,3 +171,51 @@ function redirectToMYSQLPage() {
     document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-sql.html'");
 }
 
+
+
+
+// // theme
+// let theme_toggler = document.querySelector('#theme_toggler,.nav');
+
+// theme_toggler.addEventListener('click', function () {
+//     document.body.classList.toggle('dark_mode');
+// });
+
+
+
+
+
+
+const toggleSwitch = document.getElementById('modeToggle');
+
+// Function to set theme based on toggle state
+function setTheme(theme) {
+    if (theme === 'dark') {
+        document.body.style.backgroundColor = '#000';
+        document.querySelector('.nav').style.backgroundColor = '#000';
+        document.querySelector('#quizpopup').style.backgroundColor = '#181414';
+        document.querySelector('.footer').style.backgroundColor = '#181414';
+        document.querySelector('.card-bg').style.backgroundColor = '#181414';
+    } else {
+        document.body.style.backgroundColor = '#0D1B2A';
+        document.querySelector('.nav').style.backgroundColor = '#0D1B2A';
+        document.querySelector('#quizpopup').style.backgroundColor = '#1B263B';
+        document.querySelector('.footer').style.backgroundColor = '#0D1B2A';
+        document.querySelector('.card-bg').style.backgroundColor = '#1B263B';
+    }
+}
+
+// Function to toggle theme
+function toggleTheme() {
+    if (toggleSwitch.checked) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+}
+
+// Event listener for theme toggle
+toggleSwitch.addEventListener('change', toggleTheme);
+
+// Set theme on initial load
+setTheme('light');

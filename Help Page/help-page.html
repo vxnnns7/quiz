@@ -12,19 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../logo-vansss.png" type="image/x-icon">
-    <style>
-        /* Default light theme styles */
-        body {
-            background-color: #000;
-            color: #fff;
-        }
-
-        /* Dark theme styles */
-        .dark-theme {
-            background-color: #0D1B2A;
-            color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" href="../dark-theme.css">
 </head>
 
 <body>
@@ -35,13 +23,18 @@
                 <b>ProgPuzzle</b>
             </div>
         </div>
-        
+
         <div class="nav-links">
             <a href="../index.html">Home</a>
             <a href="../Instruction page/instruction.html">Instructions</a>
             <a href="../Tutorials/Tutorials.html">Tutorials</a>
             <a href="../profile/profile.html">Profile</a>
-            <button id="toggleThemeBtn" style="background-color: #0D1B2A; border: none;">Theme</button>
+            <a href="#" class="toggle-btn">
+                <label class="switch">
+                    <input type="checkbox" id="modeToggle">
+                    <span class="slider round"></span>
+                </label>
+            </a>
         </div>
     </div>
     <div class="container">
@@ -49,7 +42,7 @@
             <h2 style="color: white;text-align: center;">Frequently Asked Questions</h2>
             <div class="accordion" id="faqAccordion">
                 <div class="card mb-3">
-                    <div class="card-header" style="background-color: #1B263B;" id="faqHeading1">
+                    <div class="card-header card-header-bg" id="faqHeading1">
                         <h5 class="mb-0">
                             <button class="btn btn-link faq-question" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1"
@@ -66,7 +59,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="faqHeading2" style="background-color: #1B263B;">
+                    <div class="card-header card-header-bg2" id="faqHeading2">
                         <h5 class="mb-0">
                             <button class="btn btn-link faq-question" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2"
@@ -98,15 +91,17 @@
                 <div class="form-group mb-3">
                     <label for="review" style="color: white;">Leave a Review:</label>
                     <textarea class="form-control mt-2" id="review" name="review" rows="4" cols="50"
-                        style="background-color: #1B263B;"></textarea>
+                        ></textarea>
                 </div>
-                <button class="btn btn-block" style="color: white; background-color: #1B263B;" type="submit">Send
+                <button class="btn btn-block" style="color: white;" type="submit">Send
                     Now!</button>
             </form>
         </div>
     </div>
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="help-page.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="help-page.js"></script>
+
 
 </html>

@@ -1,4 +1,4 @@
-* {
+*{
     box-sizing: border-box;
     margin: 0%;
     padding: 0%;
@@ -10,6 +10,8 @@
     width: 100%;
     background-color: #0D1B2A;
     position: relative;
+    transition: 0.5s ease;
+
 }
 
 .nav>.nav-header {
@@ -104,14 +106,19 @@
         overflow-y: auto;
     }
 }
-
+.card-header-bg {
+    background-color: #1B263B;
+}
+.card-header-bg2 {
+    background-color: #1B263B;
+}
 
 .reviews {
     margin-top: 40px;
 }
 
 .review {
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #1B263B;
@@ -145,3 +152,8 @@ button {
 .faq-answer {
     display: none;
 }
+
+
+
+
+
