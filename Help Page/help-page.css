@@ -1,4 +1,4 @@
-* {
+*{
     box-sizing: border-box;
     margin: 0%;
     padding: 0%;
@@ -9,8 +9,9 @@
     height: 50px;
     width: 100%;
     background-color: #0D1B2A;
-    transition: 0.5s ease;
     position: relative;
+    transition: 0.5s ease;
+
 }
 
 .nav>.nav-header {
@@ -105,89 +106,52 @@
         overflow-y: auto;
     }
 }
-
-.contact {
-    padding: 130px 0;
+.card-header-bg {
+    background-color: #1B263B;
+}
+.card-header-bg2 {
+    background-color: #1B263B;
 }
 
-.contact .heading h2 {
-    font-size: 30px;
-    font-weight: 700;
-    margin: 0;
-    padding: 0;
-    color: #E0E1DD;
+.reviews {
+    margin-top: 40px;
 }
 
-.contact .heading h2 span {
-    color: #415A77;
-}
-
-.contact .heading p {
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: #E0E1DD;
-    margin: 20px 0 60px;
-    padding: 0;
-}
-
-.contact .form-control {
-    padding: 25px;
-    font-size: 13px;
+.review {
+    border: 1px solid #ccc;
+    padding: 10px;
     margin-bottom: 10px;
-    background: #1B263B;
-    color: #E0E1DD;
-    border: 0;
-    border-radius: 10px;    
+    background-color: #1B263B;
 }
 
-.contact button.btn {
+.review p {
+    margin: 5px 0;
+    color: white;
+}
+
+.accordion .card {
+    border: none;
+}
+
+button {
     padding: 10px;
     border-radius: 10px;
     font-size: 15px;
-    background: #1B263B;
+    margin-top: 5px;
     color: #ffffff;
 }
 
-.contact .title h3 {
-    font-size: 18px;
-    font-weight: 600;
+.faq-section {
+    padding: 50px 0;
 }
 
-.contact .title p {
-    font-size: 14px;
-    font-weight: 400;
-    color: #E0E1DD;
-    line-height: 1.6;
-    margin: 0 0 40px;
+.faq-question {
+    cursor: pointer;
 }
 
-.contact .content .info {
-    margin-top: 30px;
+.faq-answer {
+    display: none;
 }
-
-.contact .content .info i {
-    font-size: 30px;
-    padding: 0;
-    margin: 0;
-    color: #E0E1DD;
-    margin-right: 20px;
-    text-align: center;
-    width: 20px;
-}
-
-.contact .content .info h4 {
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-.contact .content .info h4 span {
-    font-size: 13px;
-    font-weight: 300;
-    color: #E0E1DD;
-}
-
-
 
 
 

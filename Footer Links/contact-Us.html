@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../logo-vansss.png" type="image/x-icon">
+    <link rel="stylesheet" href="../dark-theme.css">
 </head>
 
 <body style="background-color: #0D1B2A;">
@@ -35,13 +36,19 @@
             <a href="../Instruction page/instruction.html">Instructions</a>
             <a href="../Tutorials/Tutorials.html">Tutorials</a>
             <a href="../profile/profile.html">Profile</a>
+            <a href="#" class="toggle-btn">
+                <label class="switch">
+                    <input type="checkbox" id="modeToggle">
+                    <span class="slider round"></span>
+                </label>
+            </a>
         </div>
     </div>
     <section class="contact" id="contact">
         <div class="container">
             <div class="heading text-center">
                 <h2>Contact
-                    <span> Us </span>
+                    <span class="us"> Us </span>
                 </h2>
                 <p>Have a problem? Let us solve it! 🛠️
                 </p>
@@ -49,14 +56,14 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="title">
-                        <h3 style="color: #415A77;">Contact detail</h3>
+                        <h3 style="color: #415A77;" class="detail">Contact detail</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
                     </div>
                     <div class="content">
                         <!-- Info-1 -->
                         <div class="info">
                             <i class="fas fa-mobile-alt"></i>
-                            <h4 class="d-inline-block" style="color: #415A77;">PHONE :
+                            <h4 class="d-inline-block phone" style="color: #415A77;">PHONE :
                                 <br>
                                 <span>+12457836913 , +12457836913</span>
                             </h4>
@@ -64,7 +71,7 @@
                         <!-- Info-2 -->
                         <div class="info">
                             <i class="far fa-envelope"></i>
-                            <h4 class="d-inline-block" style="color: #415A77;">EMAIL :
+                            <h4 class="d-inline-block email" style="color: #415A77;">EMAIL :
                                 <br>
                                 <span>example@info.com</span>
                             </h4>
@@ -72,7 +79,7 @@
                         <!-- Info-3 -->
                         <div class="info">
                             <i class="fas fa-map-marker-alt"></i>
-                            <h4 class="d-inline-block" style="color: #415A77;">ADDRESS :<br>
+                            <h4 class="d-inline-block address" style="color: #415A77;">ADDRESS :<br>
                                 <span>6743 last street , Abcd, Xyz</span>
                             </h4>
                         </div>
@@ -85,17 +92,18 @@
                         <input type="hidden" name="access_key" value="ad707ec4-5dc2-4037-b2fb-7ff26249cb10">
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="Name" name="Name">
+                                <input type="text" class="form-control text-bg" placeholder="Name" name="Name">
                             </div>
                             <div class="col-sm-6">
-                                <input type="email" class="form-control" placeholder="Email" name="Email">
+                                <input type="email" class="form-control email-bg" placeholder="Email" name="Email">
                             </div>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" placeholder="Subject" name="Subject">
+                                <input type="text" class="form-control subject-bg" placeholder="Subject" name="Subject">
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" id="comment" placeholder="Message" name="Message"></textarea>
+                            <textarea class="form-control textarea" rows="5" id="comment" placeholder="Message"
+                                name="Message"></textarea>
                         </div>
                         <button class="btn btn-block" type="submit">Send Now!</button>
                     </form>
@@ -105,5 +113,5 @@
     </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="contact-Us.js"></script>
 </html>

@@ -1,31 +1,31 @@
 // utility functions
-if(!Util) function Util () {};
+if (!Util) function Util() { };
 
-Util.hasClass = function(el, className) {
-  return el.classList.contains(className);
+Util.hasClass = function (el, className) {
+	return el.classList.contains(className);
 };
 
-Util.addClass = function(el, className) {
-  var classList = className.split(' ');
-  el.classList.add(classList[0]);
-  if (classList.length > 1) Util.addClass(el, classList.slice(1).join(' '));
+Util.addClass = function (el, className) {
+	var classList = className.split(' ');
+	el.classList.add(classList[0]);
+	if (classList.length > 1) Util.addClass(el, classList.slice(1).join(' '));
 };
 
-Util.removeClass = function(el, className) {
-  var classList = className.split(' ');
-  el.classList.remove(classList[0]);
-  if (classList.length > 1) Util.removeClass(el, classList.slice(1).join(' '));
+Util.removeClass = function (el, className) {
+	var classList = className.split(' ');
+	el.classList.remove(classList[0]);
+	if (classList.length > 1) Util.removeClass(el, classList.slice(1).join(' '));
 };
 
-Util.toggleClass = function(el, className, bool) {
-  if(bool) Util.addClass(el, className);
-  else Util.removeClass(el, className);
+Util.toggleClass = function (el, className, bool) {
+	if (bool) Util.addClass(el, className);
+	else Util.removeClass(el, className);
 };
 
 // File#: _1_sticky-hero
 // Usage: codyhouse.co/license
-(function() {
-	var StickyBackground = function(element) {
+(function () {
+	var StickyBackground = function (element) {
 		this.element = element;
 		this.scrollingElement = this.element.getElementsByClassName('sticky-hero__content')[0];
 		this.nextElement = this.element.nextElementSibling;
@@ -37,12 +37,12 @@ Util.toggleClass = function(el, className, bool) {
 	function initStickyEffect(element) {
 		var observer = new IntersectionObserver(stickyCallback.bind(element), { threshold: [0, 0.1, 1] });
 		observer.observe(element.scrollingElement);
-		if(element.nextElement) observer.observe(element.nextElement);
+		if (element.nextElement) observer.observe(element.nextElement);
 	};
 
 	function stickyCallback(entries, observer) {
 		var threshold = entries[0].intersectionRatio.toFixed(1);
-		(entries[0].target ==  this.scrollingElement)
+		(entries[0].target == this.scrollingElement)
 			? this.scrollingTreshold = threshold
 			: this.nextTreshold = threshold;
 
@@ -52,11 +52,50 @@ Util.toggleClass = function(el, className, bool) {
 
 	var stickyBackground = document.getElementsByClassName('js-sticky-hero'),
 		intersectionObserverSupported = ('IntersectionObserver' in window && 'IntersectionObserverEntry' in window && 'intersectionRatio' in window.IntersectionObserverEntry.prototype);
-	if(stickyBackground.length > 0 && intersectionObserverSupported) { // if IntersectionObserver is not supported, animations won't be triggeres
-		for(var i = 0; i < stickyBackground.length; i++) {
-			(function(i){ // if animations are enabled -> init the StickyBackground object
-        if( Util.hasClass(stickyBackground[i], 'sticky-hero--overlay-layer') || Util.hasClass(stickyBackground[i], 'sticky-hero--scale')) new StickyBackground(stickyBackground[i]);
-      })(i);
+	if (stickyBackground.length > 0 && intersectionObserverSupported) { // if IntersectionObserver is not supported, animations won't be triggeres
+		for (var i = 0; i < stickyBackground.length; i++) {
+			(function (i) { // if animations are enabled -> init the StickyBackground object
+				if (Util.hasClass(stickyBackground[i], 'sticky-hero--overlay-layer') || Util.hasClass(stickyBackground[i], 'sticky-hero--scale')) new StickyBackground(stickyBackground[i]);
+			})(i);
 		}
 	}
 }());
+
+
+
+
+
+
+
+
+const toggleSwitch = document.getElementById('modeToggle');
+
+// Function to set theme based on toggle state
+function setTheme(theme) {
+	if (theme === 'dark') {
+		document.body.style.backgroundColor = '#000';
+		document.querySelector('.nav').style.backgroundColor = '#000';
+		document.querySelector('.footer').style.backgroundColor = '#1d1818';
+
+	} else {
+		document.body.style.backgroundColor = '#0D1B2A';
+		document.querySelector('.nav').style.backgroundColor = '#0D1B2A';
+		document.querySelector('.footer').style.backgroundColor = '#1B263B';
+
+	}
+}
+
+// Function to toggle theme
+function toggleTheme() {
+	if (toggleSwitch.checked) {
+		setTheme('dark');
+	} else {
+		setTheme('light');
+	}
+}
+
+// Event listener for theme toggle
+toggleSwitch.addEventListener('change', toggleTheme);
+
+// Set theme on initial load
+setTheme('light');

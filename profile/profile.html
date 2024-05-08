@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="profile.css" />
 	<title>Profile</title>
 	<link rel="shortcut icon" href="../logo-vansss.png" type="image/x-icon">
+	<link rel="stylesheet" href="../dark-theme.css">
 </head>
 
 <body>
@@ -31,6 +32,12 @@
 			<a href="../Instruction page/instruction.html">Instructions</a>
 			<a href="../Tutorials/Tutorials.html">Tutorials</a>
 			<a href="profile.html">Profile</a>
+			<a href="#" class="toggle-btn">
+				<label class="switch">
+					<input type="checkbox" id="modeToggle">
+					<span class="slider round"></span>
+				</label>
+			</a>
 		</div>
 	</div>
 	<div class="container">
@@ -67,7 +74,7 @@
 					</div>
 				</form>
 				<form method="post" class="sign-up-form" onsubmit="handleSubmit1(event)" id="sign-up-form">
-					<h2 class="title">Sign up</h2>
+					<h2 class="title up">Sign up</h2>
 					<div class="input-field">
 						<i class="fas fa-user"></i>
 						<input type="text" placeholder="Username" id="username1" />
@@ -84,7 +91,7 @@
 					</div>
 					<p id="errorpassword1" style="color: red; font-size: x-small;"></p>
 					<button type="submit"><input type="submit" value="Sign Up" class="btn solid" /></button>
-					<p class="social-text">Or Sign up with social platforms</p>
+					<p class="social-text platforms">Or Sign up with social platforms</p>
 					<div class="social-media">
 						<a href="#" class="social-icon">
 							<i class="fab fa-facebook-f"></i>
