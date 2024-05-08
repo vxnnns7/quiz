@@ -116,58 +116,59 @@ function exitdisplayPopUp() {
 }
 
 function redirectToHTMLPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-html.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/html.html', '_blank')");
 }
 
 function redirectToCSSPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-css.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/css.html', '_blank')");
 }
 
 function redirectToCPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-c.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/clanguage.html', '_blank')");
 }
 
 function redirectToCPPPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-cpp.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/cpp.html', '_blank')");
 }
 
+
 function redirectToJSPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-js.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/js.html', '_blank')");
 }
 
 function redirectToJAVAPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-java.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/java.html', '_blank')");
 }
 
 function redirectToKOTLINPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-kotlin.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/kotlin.html', '_blank')");
 }
 
 function redirectToNODEJSPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-nodejs.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/nodejs.html', '_blank')");
 }
 
 function redirectToPYTHONPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-python.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/python.html', '_blank')");
 }
 
 function redirectToREACTJSPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-reactjs.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/reactjs.html', '_blank')");
 }
 
 function redirectToRUBYPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-ruby.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/ruby.html', '_blank')");
 }
 
 function redirectToSWIFTPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-swift.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/swift.html', '_blank')");
 }
 
 function redirectToTAILWINDSCSPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-tailwind-css.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/tailwind.html', '_blank')");
 }
 
 function redirectToMYSQLPage() {
-    document.getElementById("redirectButton").setAttribute("onclick", "window.location.href = './Quiz Pages/quiz-page-sql.html'");
+    document.getElementById("redirectButton").setAttribute("onclick", "window.open('./quiz-Pages/sql.html', '_blank')");
 }
 

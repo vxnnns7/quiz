@@ -1,293 +1,502 @@
-const quizdata = [
-  {
-    question: 'What is Ruby?',
-    a: 'A gemstone',
-    b: 'A programming language',
-    c: 'A web framework',
-    d: 'A database management system',
-    correct: 'b'
-  },
-  {
-    question: 'Which keyword is used to define a class in Ruby?',
-    a: 'class',
-    b: 'def',
-    c: 'function',
-    d: 'method',
-    correct: 'a'
-  },
-  {
-    question: 'What does IRB stand for in Ruby?',
-    a: 'Interactive Ruby',
-    b: 'Integrated Ruby Build',
-    c: 'Internal Ruby Binary',
-    d: 'Integrated Ruby Browser',
-    correct: 'a'
-  },
-  {
-    question: 'Which symbol is used to denote a comment in Ruby?',
-    a: '//',
-    b: '#',
-    c: '--',
-    d: '/* */',
-    correct: 'b'
-  },
-  {
-    question: 'What is the output of "puts 5 + 3" in Ruby?',
-    a: '8',
-    b: '5 + 3',
-    c: '53',
-    d: 'Error',
-    correct: 'a'
-  },
-  {
-    question: 'Which method is used to get user input in Ruby?',
-    a: 'input()',
-    b: 'getInput()',
-    c: 'gets()',
-    d: 'read()',
-    correct: 'c'
-  },
-  {
-    question: 'What is the result of "puts 10 / 3" in Ruby?',
-    a: '3',
-    b: '3.33',
-    c: '10/3',
-    d: 'Error',
-    correct: 'a'
-  },
-  {
-    question: 'Which of the following is NOT a valid data type in Ruby?',
-    a: 'Integer',
-    b: 'String',
-    c: 'Character',
-    d: 'Array',
-    correct: 'c'
-  },
-  {
-    question: 'What does the .each method do in Ruby?',
-    a: 'Iterates over each element of an array',
-    b: 'Performs a loop',
-    c: 'Returns the first element of an array',
-    d: 'None of the above',
-    correct: 'a'
-  },
-  {
-    question: 'What is the result of "puts "hello".capitalize" in Ruby?',
-    a: 'Hello',
-    b: 'HELLO',
-    c: 'hello',
-    d: 'Error',
-    correct: 'a'
-  },
-  {
-    question: 'What is the purpose of the .length method in Ruby?',
-    a: 'To return the length of a string',
-    b: 'To reverse a string',
-    c: 'To capitalize a string',
-    d: 'To convert a string to uppercase',
-    correct: 'a'
-  },
-  {
-    question: 'What is the output of "puts "ruby" * 3" in Ruby?',
-    a: 'ruby',
-    b: 'rubyrubyruby',
-    c: '3',
-    d: 'Error',
-    correct: 'b'
-  },
-  {
-    question: 'What does the .sort method do in Ruby?',
-    a: 'Sorts elements in ascending order',
-    b: 'Sorts elements in descending order',
-    c: 'Reverses the order of elements',
-    d: 'None of the above',
-    correct: 'a'
-  },
-  {
-    question: 'Which of the following is NOT a valid way to define a string in Ruby?',
-    a: '"Hello, World!"',
-    b: "'Hello, World!'",
-    c: "puts 'Hello, World!'",
-    d: '"""Hello, World!"""',
-    correct: 'c'
-  },
-  {
-    question: 'What is the result of "puts 5 == 5.0" in Ruby?',
-    a: 'true',
-    b: 'false',
-    c: 'Error',
-    d: 'TypeError',
-    correct: 'a'
-  },
-  {
-    question: 'What does the .times method do in Ruby?',
-    a: 'Performs a loop a specified number of times',
-    b: 'Multiplies two numbers',
-    c: 'Returns the current time',
-    d: 'None of the above',
-    correct: 'a'
-  },
-  {
-    question: 'What is the purpose of the .map method in Ruby?',
-    a: 'Transforms each element of an array',
-    b: 'Performs a loop',
-    c: 'Returns the first element of an array',
-    d: 'None of the above',
-    correct: 'a'
-  },
-  {
-    question: 'What is the output of "puts [1, 2, 3].join(", ")" in Ruby?',
-    a: '1, 2, 3',
-    b: '123',
-    c: '1 2 3',
-    d: 'Error',
-    correct: 'a'
-  },
-  {
-    question: 'What is the purpose of the .include? method in Ruby?',
-    a: 'Checks if an element is included in an array',
-    b: 'Includes a module in a class',
-    c: 'Checks if a file exists',
-    d: 'None of the above',
-    correct: 'a'
-  },
-  {
-    question: 'What is the result of "puts "hello world".split(" ")" in Ruby?',
-    a: '["hello", "world"]',
-    b: '["hello world"]',
-    c: '"hello world"',
-    d: 'Error',
-    correct: 'a'
-  },
-  {
-    question: 'What is the purpose of the .reverse method in Ruby?',
-    a: 'Reverses the order of elements in an array',
-    b: 'Reverses the characters in a string',
-    c: 'Returns the last element of an array',
-    d: 'None of the above',
-    correct: 'a'
-  },
-  {
-    question: 'What is the output of "puts (1..5).to_a" in Ruby?',
-    a: '[1, 2, 3, 4, 5]',
-    b: '(1..5)',
-    c: '1 2 3 4 5',
-    d: 'Error',
-    correct: 'a'
-  },
-  {
-    question: 'What is the purpose of the .uniq method in Ruby?',
-    a: 'Removes duplicate elements from an array',
-    b: 'Returns unique elements from an array',
-    c: 'Returns the length of an array',
-    d: 'None of the above',
-    correct: 'a'
-  },
-  {
-    question: 'What is the result of "puts 5 % 2" in Ruby?',
-    a: '2.5',
-    b: '3',
-    c: '2',
-    d: 'Error',
-    correct: 'c'
-  },
-  {
-    question: 'What is the purpose of the .gsub method in Ruby?',
-    a: 'Replaces a substring in a string with another substring',
-   
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
 
- b: 'Adds a substring to the beginning of a string',
-    c: 'Removes a substring from a string',
-    d: 'None of the above',
-    correct: 'a'
+//Questions and Options array
+
+const quizArray = [
+  {
+      id: "1",
+      question: "What is Ruby?",
+      options: [
+          "A programming language",
+          "A database management system",
+          "A web server",
+          "A JavaScript library"
+      ],
+      correct: "A programming language"
   },
   {
-    question: 'What is the output of "puts 1 + 1 == 2 && 2 + 2 == 4" in Ruby?',
-    a: 'true',
-    b: 'false',
-    c: 'Error',
-    d: 'TypeError',
-    correct: 'a'
+      id: "2",
+      question: "Who created Ruby?",
+      options: [
+          "Yukihiro Matsumoto",
+          "Guido van Rossum",
+          "Linus Torvalds",
+          "James Gosling"
+      ],
+      correct: "Yukihiro Matsumoto"
   },
   {
-    question: 'What is the purpose of the .compact method in Ruby?',
-    a: 'Removes nil elements from an array',
-    b: 'Removes empty elements from an array',
-    c: 'Removes duplicate elements from an array',
-    d: 'None of the above',
-    correct: 'a'
+      id: "3",
+      question: "What is the main feature of Ruby known for its simplicity and productivity?",
+      options: [
+          "RubyGems",
+          "Ruby on Rails",
+          "Sinatra",
+          "Rack"
+      ],
+      correct: "Ruby on Rails"
   },
   {
-    question: 'What is the result of "puts 3 ** 2" in Ruby?',
-    a: '9',
-    b: '6',
-    c: '32',
-    d: 'Error',
-    correct: 'a'
+      id: "4",
+      question: "Which symbol is used to define a block in Ruby?",
+      options: [
+          "{}",
+          "()",
+          "[]",
+          "<>"
+      ],
+      correct: "{}"
+  },
+  {
+      id: "5",
+      question: "What does IRB stand for in Ruby?",
+      options: [
+          "Interactive Ruby",
+          "Integrated Ruby Builder",
+          "Internal Ruby",
+          "Innovative Ruby Base"
+      ],
+      correct: "Interactive Ruby"
+  },
+  {
+      id: "6",
+      question: "What does RVM stand for in Ruby development?",
+      options: [
+          "Ruby Version Manager",
+          "Ruby Virtual Machine",
+          "Ruby Version Migration",
+          "Ruby Validation Module"
+      ],
+      correct: "Ruby Version Manager"
+  },
+  {
+      id: "7",
+      question: "Which operator is used to concatenate strings in Ruby?",
+      options: [
+          "+",
+          "&",
+          ".",
+          ","
+      ],
+      correct: "+"
+  },
+  {
+      id: "8",
+      question: "What is a gem in the context of Ruby?",
+      options: [
+          "A package management system",
+          "A programming language feature",
+          "A type of data structure",
+          "A database management system"
+      ],
+      correct: "A package management system"
+  },
+  {
+      id: "9",
+      question: "Which module is used for handling HTTP requests and responses in Ruby?",
+      options: [
+          "Net::HTTP",
+          "HTTParty",
+          "HTTPClient",
+          "Faraday"
+      ],
+      correct: "Net::HTTP"
+  },
+  {
+      id: "10",
+      question: "What is the purpose of the `require` keyword in Ruby?",
+      options: [
+          "To include external libraries",
+          "To define a variable",
+          "To loop through an array",
+          "To define a class"
+      ],
+      correct: "To include external libraries"
+  },
+  {
+      id: "11",
+      question: "What is the purpose of the `yield` keyword in Ruby?",
+      options: [
+          "To return a value from a method",
+          "To define a block",
+          "To loop through a collection",
+          "To execute a block passed to a method"
+      ],
+      correct: "To execute a block passed to a method"
+  },
+  {
+      id: "12",
+      question: "Which symbol is used to define a symbol in Ruby?",
+      options: [
+          ":",
+          "$",
+          "@",
+          "&"
+      ],
+      correct: ":"
+  },
+  {
+      id: "13",
+      question: "What is the purpose of the `attr_accessor` method in Ruby?",
+      options: [
+          "To create getter and setter methods for class attributes",
+          "To define a class variable",
+          "To access an instance variable",
+          "To define a class method"
+      ],
+      correct: "To create getter and setter methods for class attributes"
+  },
+  {
+      id: "14",
+      question: "Which loop construct is used to iterate over a collection of elements in Ruby?",
+      options: [
+          "each",
+          "for",
+          "while",
+          "until"
+      ],
+      correct: "each"
+  },
+  {
+      id: "15",
+      question: "What is the purpose of the `include?` method in Ruby?",
+      options: [
+          "To check if an element exists in an array",
+          "To include a module in a class",
+          "To concatenate strings",
+          "To check if a string includes another string"
+      ],
+      correct: "To check if a string includes another string"
+  },
+  {
+      id: "16",
+      question: "What is the purpose of the `self` keyword in Ruby?",
+      options: [
+          "To refer to the current instance of a class",
+          "To define a class method",
+          "To create a new instance of a class",
+          "To access a class variable"
+      ],
+      correct: "To refer to the current instance of a class"
+  },
+  {
+      id: "17",
+      question: "Which method is used to convert a string to uppercase in Ruby?",
+      options: [
+          "upcase",
+          "uppercase",
+          "to_upper",
+          "to_uppercase"
+      ],
+      correct: "upcase"
+  },
+  {
+      id: "18",
+      question: "What is the purpose of the `puts` method in Ruby?",
+      options: [
+          "To print a string with a newline character",
+          "To concatenate strings",
+          "To define a variable",
+          "To check if a condition is true"
+      ],
+      correct: "To print a string with a newline character"
+  },
+  {
+      id: "19",
+      question: "Which method is used to sort an array in Ruby?",
+      options: [
+          "sort",
+          "order",
+          "arrange",
+          "sort_by"
+      ],
+      correct: "sort"
+  },
+  {
+      id: "20",
+      question: "What does `puts` stand for in Ruby?",
+      options: [
+          "Put String",
+          "Print with Newline",
+          "Print String",
+          "Print to STDOUT"
+      ],
+      correct: "Print to STDOUT"
+  },
+  {
+      id: "21",
+      question: "What is the purpose of the `module` keyword in Ruby?",
+      options: [
+          "To define a namespace",
+          "To define a class",
+          "To include a module",
+          "To define a method"
+      ],
+      correct: "To define a namespace"
+  },
+  {
+      id: "22",
+      question: "Which method is used to remove duplicate elements from an array in Ruby?",
+      options: [
+          "uniq",
+          "unique",
+          "remove_duplicates",
+          "distinct"
+      ],
+      correct: "uniq"
+  },
+  {
+      id: "23",
+      question: "What is the purpose of the `gsub` method in Ruby?",
+      options: [
+          "To replace substrings in a string",
+          "To split a string into an array",
+          "To concatenate strings",
+          "To check if a string includes another string"
+      ],
+      correct: "To replace substrings in a string"
+  },
+  {
+      id: "24",
+      question: "Which operator is used to check if two values are equal in Ruby?",
+      options: [
+          "==",
+          "=",
+          "===",
+          "!="
+      ],
+      correct: "=="
+  },
+  {
+      id: "25",
+      question: "What is the purpose of the `||` operator in Ruby?",
+      options: [
+          "Logical OR",
+          "Logical AND",
+          "Logical NOT",
+          "Bitwise OR"
+      ],
+      correct: "Logical OR"
+  },
+  {
+      id: "26",
+      question: "What is the purpose of the `nil` keyword in Ruby?",
+      options: [
+          "To represent absence of a value",
+          "To define a class",
+          "To define a method",
+          "To check if a variable is empty"
+      ],
+      correct: "To represent absence of a value"
+  },
+  {
+      id: "27",
+      question: "What is the purpose of the `to_s` method in Ruby?",
+      options: [
+          "To convert an object to a string",
+          "To convert a string to an integer",
+          "To convert a string to a symbol",
+          "To convert an object to an array"
+      ],
+      correct: "To convert an object to a string"
+  },
+  {
+      id: "28",
+      question: "What is the purpose of the `to_i` method in Ruby?",
+      options: [
+          "To convert a string to an integer",
+          "To convert an integer to a string",
+          "To convert an object to a string",
+          "To convert a string to a symbol"
+      ],
+      correct: "To convert a string to an integer"
+  },
+  {
+      id: "29",
+      question: "What is the purpose of the `to_f` method in Ruby?",
+      options: [
+          "To convert a string to a floating-point number",
+          "To convert a floating-point number to a string",
+          "To convert an object to a floating-point number",
+          "To convert a floating-point number to an integer"
+      ],
+      correct: "To convert a string to a floating-point number"
+  },
+  {
+      id: "30",
+      question: "Which method is used to iterate over the keys and values of a hash in Ruby?",
+      options: [
+          "each",
+          "for",
+          "map",
+          "collect"
+      ],
+      correct: "each"
   }
 ];
 
+//Restart Quiz
+restart.addEventListener("click", () => {
+    initial();
+    displayContainer.classList.remove("hide");
+    scoreContainer.classList.add("hide");
+});
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
-    }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
-
-document.querySelector("#submit").addEventListener(
+//Next Button
+nextBtn.addEventListener(
     "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
+    (displayNext = () => {
+        //increment questionCount
+        questionCount += 1;
+        //if last question
+        if (questionCount == quizArray.length) {
+            //hide question container and display score
+            displayContainer.classList.add("hide");
+            scoreContainer.classList.remove("hide");
+            //user score
+            userScore.innerHTML =
+                "Your score is " + scoreCount + " out of " + questionCount;
         } else {
-            incorrect++;
+            //display questionCount
+            countOfQuestion.innerHTML =
+                questionCount + 1 + " of " + quizArray.length + " Question";
+            //display quiz
+            quizDisplay(questionCount);
+            count = 11;
+            clearInterval(countdown);
+            timerDisplay();
         }
-        index++;
-        loadQuestion()
+    })
+);
+
+//Timer
+const timerDisplay = () => {
+    countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+            clearInterval(countdown);
+            displayNext();
+        }
+    }, 1000);
+};
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+    let quizCards = document.querySelectorAll(".container-mid");
+    //Hide other cards
+    quizCards.forEach((card) => {
+        card.classList.add("hide");
+    });
+    //display current question card
+    quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+    //randomly sort questions
+    quizArray.sort(() => Math.random() - 0.5);
+    //generate quiz
+    for (let i of quizArray) {
+        //randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+        //quiz card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+        //question number
+        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        //question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        //options
+        div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+        quizContainer.appendChild(div);
     }
-)
+}
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+    let userSolution = userOption.innerText;
+    let question = document.getElementsByClassName("container-mid")[questionCount];
+    let options = question.querySelectorAll(".option-div");
+
+    // For marking the correct option
+    options.forEach((element) => {
+        if (element.innerText == quizArray[questionCount].correct) {
+            element.classList.add("correct");
         }
-    )
-    return ans;
+    });
+
+    // Mark the user's selected option as incorrect and change its color to red
+    userOption.classList.add("incorrect");
+
+    // Clear interval (stop timer)
+    clearInterval(countdown);
+
+    // Disable all options
+    options.forEach((element) => {
+        element.disabled = true;
+    });
+
+    // Increment the score if the user's answer was initially correct
+    if (userSolution == quizArray[questionCount].correct) {
+        scoreCount++;
+    }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//initial setup
+function initial() {
+    quizContainer.innerHTML = "";
+    questionCount = 0;
+    scoreCount = 0;
+    count = 11;
+    clearInterval(countdown);
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//when user click on start button
+startButton.addEventListener("click", () => {
+    startScreen.classList.add("hide");
+    displayContainer.classList.remove("hide");
+    initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+    startScreen.classList.remove("hide");
+    displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+    document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
 }
-loadQuestion(index);
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Close the current tab
+        window.close();
+    }
+});

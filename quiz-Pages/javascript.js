@@ -1,308 +1,506 @@
-const quizData = [
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
+
+//Questions and Options array
+
+const quizArray = [
   {
-    question: "What is the result of the following code snippet? console.log(2 + '2' - 1);",
-    a: "22",
-    b: "3",
-    c: "21",
-    d: "NaN",
-    correct: "b"
+    id: "1",
+    question: "Which of the following is not a valid JavaScript variable name?",
+    options: [
+      "myVariable",
+      "_myVariable",
+      "2myVariable",
+      "$myVariable"
+    ],
+    correct: "2myVariable"
   },
   {
-    question: "What does NaN stand for?",
-    a: "Not a Number",
-    b: "Null and None",
-    c: "Number and Null",
-    d: "Now and Never",
-    correct: "a"
+    id: "2",
+    question: "What will the following code output?\n\nconsole.log(2 + '2');",
+    options: [
+      "4",
+      "22",
+      "Error",
+      "NaN"
+    ],
+    correct: "22"
   },
   {
-    question: "What is the output of the following code snippet? console.log(typeof typeof 1);",
-    a: "'number'",
-    b: "'string'",
-    c: "'object'",
-    d: "'undefined'",
-    correct: "b"
+    id: "3",
+    question: "What is the result of the following expression: 5 == '5'?",
+    options: [
+      "true",
+      "false",
+      "Error",
+      "NaN"
+    ],
+    correct: "true"
   },
   {
-    question: "What is the purpose of the 'let' keyword in JavaScript?",
-    a: "To declare a variable with block scope",
-    b: "To declare a variable with global scope",
-    c: "To declare a constant variable",
-    d: "To declare a variable with function scope",
-    correct: "a"
+    id: "4",
+    question: "How do you create a function in JavaScript?",
+    options: [
+      "function = myFunction() {}",
+      "def myFunction() {}",
+      "function myFunction() {}",
+      "myFunction = function() {}"
+    ],
+    correct: "function myFunction() {}"
   },
   {
-    question: "Which of the following statements is true about JavaScript?",
-    a: "JavaScript is a statically typed language",
-    b: "JavaScript cannot be used to manipulate HTML elements",
-    c: "JavaScript is an object-oriented language",
-    d: "JavaScript code runs on the server-side only",
-    correct: "c"
+    id: "5",
+    question: "What is the correct way to write an if statement in JavaScript?",
+    options: [
+      "if (x == 5) {}",
+      "if x == 5 {}",
+      "if x = 5 then {}",
+      "if x = 5 {}"
+    ],
+    correct: "if (x == 5) {}"
   },
   {
-    question: "What does the 'typeof' operator in JavaScript return when used on an array?",
-    a: "'array'",
-    b: "'object'",
-    c: "'array'",
-    d: "'undefined'",
-    correct: "b"
+    id: "6",
+    question: "How do you add a comment in JavaScript?",
+    options: [
+      "// This is a comment",
+      "/* This is a comment */",
+      "# This is a comment",
+      "' This is a comment"
+    ],
+    correct: "// This is a comment"
   },
   {
-    question: "What is the output of the following code snippet? console.log(0.1 + 0.2);",
-    a: "0.3",
-    b: "0.30000000000000004",
-    c: "0.2",
-    d: "0.1",
-    correct: "b"
+    id: "7",
+    question: "Which keyword is used to declare a variable in JavaScript?",
+    options: [
+      "var",
+      "let",
+      "const",
+      "All of the above"
+    ],
+    correct: "All of the above"
   },
   {
-    question: "What is the purpose of the 'this' keyword in JavaScript?",
-    a: "To refer to the current function",
-    b: "To refer to the global object",
-    c: "To refer to the parent object",
-    d: "To refer to the current object",
-    correct: "d"
+    id: "8",
+    question: "What is the correct way to write a JavaScript array?",
+    options: [
+      "var colors = (\"red\", \"green\", \"blue\")",
+      "var colors = [\"red\", \"green\", \"blue\"]",
+      "var colors = \"red\", \"green\", \"blue\"",
+      "var colors = {\"red\", \"green\", \"blue\"}"
+    ],
+    correct: "var colors = [\"red\", \"green\", \"blue\"]"
   },
   {
-    question: "Which operator is used to concatenate strings in JavaScript?",
-    a: "+",
-    b: "-",
-    c: "*",
-    d: "/",
-    correct: "a"
+    id: "9",
+    question: "How do you access the last element of an array named 'myArray' in JavaScript?",
+    options: [
+      "myArray[length]",
+      "myArray[length - 1]",
+      "myArray[last]",
+      "myArray[lastElement]"
+    ],
+    correct: "myArray[length - 1]"
   },
   {
-    question: "What is the output of the following code snippet? console.log('2' == 2);",
-    a: "true",
-    b: "false",
-    c: "undefined",
-    d: "NaN",
-    correct: "a"
+    id: "10",
+    question: "What does the 'typeof' operator in JavaScript return?",
+    options: [
+      "The type of a variable",
+      "The value of a variable",
+      "The length of a variable",
+      "The address of a variable"
+    ],
+    correct: "The type of a variable"
   },
   {
-    question: "What does the 'isNaN' function in JavaScript do?",
-    a: "Checks if a value is not a number",
-    b: "Checks if a value is a number",
-    c: "Converts a value to a number",
-    d: "Checks if a value is undefined",
-    correct: "a"
+    id: "11",
+    question: "What is the result of the following expression: '10' + 5?",
+    options: [
+      "15",
+      "105",
+      "Error",
+      "NaN"
+    ],
+    correct: "105"
   },
   {
-    question: "Which method is used to remove the last element from an array in JavaScript?",
-    a: "pop()",
-    b: "shift()",
-    c: "splice()",
-    d: "slice()",
-    correct: "a"
+    id: "12",
+    question: "Which built-in method returns the length of a string in JavaScript?",
+    options: [
+      "length()",
+      "size()",
+      "count()",
+      "None of the above"
+    ],
+    correct: "None of the above"
   },
   {
-    question: "What is the purpose of the 'new' keyword in JavaScript?",
-    a: "To create a new function",
-    b: "To create a new object",
-    c: "To create a new variable",
-    d: "To create a new array",
-    correct: "b"
+    id: "13",
+    question: "What is the output of the following code snippet?\n\nconsole.log(typeof undefined);",
+    options: [
+      "undefined",
+      "null",
+      "Error",
+      "string"
+    ],
+    correct: "undefined"
   },
   {
-    question: "What is the output of the following code snippet? console.log(typeof(null));",
-    a: "'object'",
-    b: "'null'",
-    c: "'undefined'",
-    d: "'number'",
-    correct: "a"
+    id: "14",
+    question: "Which of the following is not a valid JavaScript data type?",
+    options: [
+      "string",
+      "boolean",
+      "integer",
+      "object"
+    ],
+    correct: "integer"
   },
   {
-    question: "What does the '!=='' operator in JavaScript mean?",
-    a: "Equal value and equal type",
-    b: "Not equal value or not equal type",
-    c: "Equal value but not equal type",
-    d: "Not equal value but equal type",
-    correct: "b"
+    id: "15",
+    question: "What is the purpose of the 'return' statement in a JavaScript function?",
+    options: [
+      "To terminate the function",
+      "To return a value from the function",
+      "To print a value to the console",
+      "To declare a variable"
+    ],
+    correct: "To return a value from the function"
   },
   {
-    question: "What is the output of the following code snippet? console.log(3 > 2 > 1);",
-    a: "true",
-    b: "false",
-    c: "TypeError",
-    d: "undefined",
-    correct: "b"
+    id: "16",
+    question: "What is the output of the following code snippet?\n\nvar x = 10;\nconsole.log(x == '10');",
+    options: [
+      "true",
+      "false",
+      "Error",
+      "NaN"
+    ],
+    correct: "true"
   },
   {
-    question: "What is the output of the following code snippet? console.log(5 + '5');",
-    a: "55",
-    b: "10",
-    c: "25",
-    d: "Error",
-    correct: "a"
+    id: "17",
+    question: "Which method is used to add new items to the end of an array in JavaScript?",
+    options: [
+      "push()",
+      "add()",
+      "insert()",
+      "append()"
+    ],
+    correct: "push()"
   },
   {
-    question: "What is the purpose of the 'bind' method in JavaScript?",
-    a: "To attach an event handler to an element",
-    b: "To merge two or more arrays",
-    c: "To create a new array with the results of calling a provided function on every element in the calling array",
-    d: "To create a new function with a specified 'this' value and initial arguments",
-    correct: "d"
+    id: "18",
+    question: "What is the output of the following code snippet?\n\nconsole.log(Math.floor(4.6));",
+    options: [
+      "4.6",
+      "5",
+      "4",
+      "6"
+    ],
+    correct: "4"
   },
   {
-    question: "What is the output of the following code snippet? console.log(1 + '1' == 11);",
-    a: "true",
-    b: "false",
-    c: "undefined",
-    d: "NaN",
-    correct: "a"
+    id: "19",
+    question: "What is the purpose of the 'typeof' operator in JavaScript?",
+    options: [
+      "To check the type of a variable",
+      "To convert a variable to a different type",
+      "To create a new variable",
+      "To delete a variable"
+    ],
+    correct: "To check the type of a variable"
   },
   {
-    question: "What is the purpose of the 'slice' method in JavaScript?",
-    a: "To remove the last element from an array",
-    b: "To create a shallow copy of an array",
-    c: "To add one or more elements to the end of an array",
-    d: "To iterate over the elements of an array",
-    correct: "b"
+    id: "20",
+    question: "What is the output of the following code snippet?\n\nconsole.log(10 > 5 && 5 < 10);",
+    options: [
+      "true",
+      "false",
+      "Error",
+      "NaN"
+    ],
+    correct: "true"
   },
   {
-    question: "What is the output of the following code snippet? console.log(2 * '2');",
-    a: "4",
-    b: "22",
-    c: "NaN",
-    d: "Error",
-    correct: "a"
+    id: "21",
+    question: "What is the result of the following expression: 5 + '5'?",
+    options: [
+      "10",
+      "55",
+      "Error",
+      "NaN"
+    ],
+    correct: "55"
   },
   {
-    question: "What does the 'splice' method do in JavaScript?",
-    a: "Adds one or more elements to the end of an array",
-    b: "Removes the last element from an array",
-    c: "Removes elements from an array and, if necessary, inserts new elements in their place",
-    d: "Creates a new array with the results of calling a provided function on every element in the calling array",
-    correct: "c"
+    id: "22",
+    question: "What is the output of the following code snippet?\n\nconsole.log('hello'.toUpperCase());",
+    options: [
+      "HELLO",
+      "Hello",
+      "hello",
+      "Error"
+    ],
+    correct: "HELLO"
   },
   {
-    question: "What is the output of the following code snippet? console.log(typeof NaN);",
-    a: "'number'",
-    b: "'NaN'",
-    c: "'undefined'",
-    d: "'object'",
-    correct: "a"
+    id: "23",
+    question: "Which method is used to remove the last item from an array in JavaScript?",
+    options: [
+      "pop()",
+      "remove()",
+      "delete()",
+      "last()"
+    ],
+    correct: "pop()"
   },
   {
-    question: "What is the purpose of the 'map' method in JavaScript?",
-    a: "To remove elements from an array",
-    b: "To add elements to the beginning of an array",
-    c: "To iterate over the elements of an array and modify them",
-    d: "To create a new array with the results of calling a provided function on every element in the calling array",
-    correct: "d"
+    id: "24",
+    question: "What is the output of the following code snippet?\n\nconsole.log(Math.max(0, 150, 30, 20));",
+    options: [
+      "150",
+      "30",
+      "20",
+      "Error"
+    ],
+    correct: "150"
   },
   {
-    question: "What is the output of the following code snippet? console.log('hello'.toUpperCase());",
-    a: "'HELLO'",
-    b: "'hello'",
-    c: "'Hello'",
-    d: "Error",
-    correct: "a"
+    id: "25",
+    question: "Which built-in method returns the string representation of the number's value in JavaScript?",
+    options: [
+      "toString()",
+      "toNumber()",
+      "numberToString()",
+      "stringify()"
+    ],
+    correct: "toString()"
   },
   {
-    question: "What is the purpose of the 'filter' method in JavaScript?",
-    a: "To remove elements from an array",
-    b: "To add elements to the beginning of an array",
-    c: "To create a new array with all elements that pass the test implemented by the provided function",
-    d: "To iterate over the elements of an array and modify them",
-    correct: "c"
+    id: "26",
+    question: "What is the output of the following code snippet?\n\nconsole.log(typeof NaN);",
+    options: [
+      "number",
+      "NaN",
+      "Error",
+      "string"
+    ],
+    correct: "number"
   },
   {
-    question: "What is the output of the following code snippet? console.log(Boolean('false'));",
-    a: "true",
-    b: "false",
-    c: "TypeError",
-    d: "undefined",
-    correct: "a"
+    id: "27",
+    question: "Which method is used to round a number downwards to the nearest integer in JavaScript?",
+    options: [
+      "Math.floor()",
+      "Math.round()",
+      "Math.ceil()",
+      "Math.trunc()"
+    ],
+    correct: "Math.floor()"
   },
   {
-    question: "What is the purpose of the 'reduce' method in JavaScript?",
-    a: "To remove elements from an array",
-    b: "To execute a reducer function on each element of the array, resulting in a single output value",
-    c: "To create a new array with the results of calling a provided function on every element in the calling array",
-    d: "To add elements to the beginning of an array",
-    correct: "b"
+    id: "28",
+    question: "What does the 'new' keyword do in JavaScript?",
+    options: [
+      "Creates a new function",
+      "Creates a new instance of an object",
+      "Deletes an object",
+      "None of the above"
+    ],
+    correct: "Creates a new instance of an object"
   },
   {
-    question: "What is the output of the following code snippet? console.log(4 ** 3);",
-    a: "12",
-    b: "64",
-    c: "81",
-    d: "12",
-    correct: "c"
+    id: "29",
+    question: "Which operator is used for exponentiation in JavaScript?",
+    options: [
+      "**",
+      "^",
+      "^^",
+      "//"
+    ],
+    correct: "**"
   },
   {
-    question: "What is the purpose of the 'forEach' method in JavaScript?",
-    a: "To remove elements from an array",
-    b: "To add elements to the beginning of an array",
-    c: "To execute a provided function once for each array element",
-    d: "To create a new array with the results of calling a provided function on every element in the calling array",
-    correct: "c"
+    id: "30",
+    question: "What is the output of the following code snippet?\n\nvar x = 5;\nconsole.log(x++);",
+    options: [
+      "5",
+      "6",
+      "Error",
+      "NaN"
+    ],
+    correct: "5"
   }
 ];
 
 
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
+
+
+//Restart Quiz
+restart.addEventListener("click", () => {
+  initial();
+  displayContainer.classList.remove("hide");
+  scoreContainer.classList.add("hide");
+});
+
+//Next Button
+nextBtn.addEventListener(
+  "click",
+  (displayNext = () => {
+    //increment questionCount
+    questionCount += 1;
+    //if last question
+    if (questionCount == quizArray.length) {
+      //hide question container and display score
+      displayContainer.classList.add("hide");
+      scoreContainer.classList.remove("hide");
+      //user score
+      userScore.innerHTML =
+        "Your score is " + scoreCount + " out of " + questionCount;
+    } else {
+      //display questionCount
+      countOfQuestion.innerHTML =
+        questionCount + 1 + " of " + quizArray.length + " Question";
+      //display quiz
+      quizDisplay(questionCount);
+      count = 11;
+      clearInterval(countdown);
+      timerDisplay();
     }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
+  })
+);
 
-document.querySelector("#submit").addEventListener(
-    "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
-        } else {
-            incorrect++;
-        }
-        index++;
-        loadQuestion()
+//Timer
+const timerDisplay = () => {
+  countdown = setInterval(() => {
+    count--;
+    timeLeft.innerHTML = `${count}s`;
+    if (count == 0) {
+      clearInterval(countdown);
+      displayNext();
     }
-)
+  }, 1000);
+};
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
-        }
-    )
-    return ans;
+//Display quiz
+const quizDisplay = (questionCount) => {
+  let quizCards = document.querySelectorAll(".container-mid");
+  //Hide other cards
+  quizCards.forEach((card) => {
+    card.classList.add("hide");
+  });
+  //display current question card
+  quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+  //randomly sort questions
+  quizArray.sort(() => Math.random() - 0.5);
+  //generate quiz
+  for (let i of quizArray) {
+    //randomly sort options
+    i.options.sort(() => Math.random() - 0.5);
+    //quiz card creation
+    let div = document.createElement("div");
+    div.classList.add("container-mid", "hide");
+    //question number
+    countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+    //question
+    let question_DIV = document.createElement("p");
+    question_DIV.classList.add("question");
+    question_DIV.innerHTML = i.question;
+    div.appendChild(question_DIV);
+    //options
+    div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+    quizContainer.appendChild(div);
+  }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+  let userSolution = userOption.innerText;
+  let question = document.getElementsByClassName("container-mid")[questionCount];
+  let options = question.querySelectorAll(".option-div");
+
+  // For marking the correct option
+  options.forEach((element) => {
+    if (element.innerText == quizArray[questionCount].correct) {
+      element.classList.add("correct");
+    }
+  });
+
+  // Mark the user's selected option as incorrect and change its color to red
+  userOption.classList.add("incorrect");
+
+  // Clear interval (stop timer)
+  clearInterval(countdown);
+
+  // Disable all options
+  options.forEach((element) => {
+    element.disabled = true;
+  });
+
+  // Increment the score if the user's answer was initially correct
+  if (userSolution == quizArray[questionCount].correct) {
+    scoreCount++;
+  }
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//initial setup
+function initial() {
+  quizContainer.innerHTML = "";
+  questionCount = 0;
+  scoreCount = 0;
+  count = 11;
+  clearInterval(countdown);
+  timerDisplay();
+  quizCreator();
+  quizDisplay(questionCount);
 }
-loadQuestion(index);
+
+//when user click on start button
+startButton.addEventListener("click", () => {
+  startScreen.classList.add("hide");
+  displayContainer.classList.remove("hide");
+  initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+  startScreen.classList.remove("hide");
+  displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+  document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
+}
+
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "hidden") {
+    // Close the current tab
+    window.close();
+  }
+});

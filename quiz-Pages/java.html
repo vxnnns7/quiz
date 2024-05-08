@@ -10,35 +10,31 @@
 </head>
 
 <body>
-    <section class="main">
-
-        <div class="container">
-            <div class="col">
-                <h3 id="questionBox">
-                    1 Lorem ipsum dolor sit amet, consectetur adipisicing elit Debitis?
-                </h3>
+    <div class="start-screen">
+        <button id="start-button">Start</button>
+    </div>
+    <div id="display-container">
+        <div class="header">
+            <div class="number-of-count">
+                <span class="number-of-question">1 of 3 questions</span>
             </div>
-            <div class="col box">
-                <input name="option" type="radio" id="first" value="a" required>
-                <label for="first">Testing 1</label>
+            <div class="timer-div">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/time-and-date/stopwatch-icon.png"
+                    width="20px" />
+                <span class="time-left">10s</span>
             </div>
-            <div class="col box">
-                <input name="option" type="radio" id="second" value="b" required>
-                <label for="second">Testing 2</label>
-            </div>
-            <div class="col box">
-                <input name="option" type="radio" id="third" value="c" required>
-                <label for="third">Testing 3</label>
-            </div>
-            <div class="col box">
-                <input name="option" type="radio" id="fourth" value="d" required>
-                <label for="fourth">Testing 4</label>
-            </div>
-            <button id="submit">Submit</button>
         </div>
-
-    </section>
-    <script src="./java.js"></script>
+        <div id="container">
+            <!-- questions and options will be displayed here -->
+        </div>
+        <button id="next-button">Next</button>
+    </div>
+    <div class="score-container hide">
+        <div id="user-score">Demo Score</div>
+        <button id="restart">Restart</button>
+        <button id="exit" onclick="redirectToIndexPage()">Exit</button>
+    </div>
 </body>
+<script src="./java.js"></script>
 
 </html>
