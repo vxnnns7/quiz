@@ -1,306 +1,507 @@
-const quizData = [{
-    question: "What is the syntax for declaring a variable in C++?",
-    a: "variableName = value;",
-    b: "var variableName = value;",
-    c: "int variableName = value;",
-    d: "variableName;",
-    correct: "c"
-},
-{
-    question: "Which of the following is NOT a valid data type in C++?",
-    a: "float",
-    b: "string",
-    c: "char",
-    d: "double",
-    correct: "b"
-},
-{
-    question: "What is the purpose of the cout object in C++?",
-    a: "To read input from the user",
-    b: "To perform mathematical calculations",
-    c: "To display output to the console",
-    d: "To define custom functions",
-    correct: "c"
-},
-{
-    question: "Which symbol is used for single-line comments in C++?",
-    a: "//",
-    b: "--",
-    c: "/* */",
-    d: "##",
-    correct: "a"
-},
-{
-    question: "What is the purpose of the cin object in C++?",
-    a: "To print output to the console",
-    b: "To read input from the user",
-    c: "To perform string operations",
-    d: "To define custom functions",
-    correct: "b"
-},
-{
-    question: "Which of the following is the correct syntax to declare a pointer variable in C++?",
-    a: "int ptr;",
-    b: "ptr int;",
-    c: "pointer int;",
-    d: "int *ptr;",
-    correct: "d"
-},
-{
-    question: "What is the purpose of the sizeof() operator in C++?",
-    a: "To determine the size of a variable or data type",
-    b: "To perform arithmetic operations",
-    c: "To read input from the user",
-    d: "To define custom functions",
-    correct: "a"
-},
-{
-    question: "Which header file is used for input and output operations in C++?",
-    a: "<iostream>",
-    b: "<stdlib.h>",
-    c: "<cmath>",
-    d: "<cstring>",
-    correct: "a"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint x = 5, y = 3;\nstd::cout << (x / y);",
-    a: "1",
-    b: "1.6667",
-    c: "1.5",
-    d: "1.0",
-    correct: "d"
-},
-{
-    question: "What is the output of the following code snippet?\n\nstd::string str = \"Hello\";\nstd::cout << str.length();",
-    a: "5",
-    b: "6",
-    c: "11",
-    d: "10",
-    correct: "a"
-},
-{
-    question: "Which of the following statements is true about arrays in C++?",
-    a: "Arrays can hold only elements of the same data type",
-    b: "Arrays can dynamically resize at runtime",
-    c: "Arrays can only store a fixed number of elements",
-    d: "Arrays can be initialized without specifying the size",
-    correct: "c"
-},
-{
-    question: "What is the purpose of the break statement in C++?",
-    a: "To terminate the program execution",
-    b: "To skip the current iteration of a loop",
-    c: "To return a value from a function",
-    d: "To define custom functions",
-    correct: "b"
-},
-{
-    question: "Which of the following is the correct syntax for the switch statement in C++?",
-    a: "switch (expression) { case constant: statements }",
-    b: "switch (expression) { default: statements }",
-    c: "switch (expression) { case constant: statements default: statements }",
-    d: "switch (expression) { case constant: statements; default: statements; }",
-    correct: "a"
-},
-{
-    question: "What is the purpose of the continue statement in C++?",
-    a: "To terminate the program execution",
-    b: "To skip the current iteration of a loop and continue with the next iteration",
-    c: "To return a value from a function",
-    d: "To define custom functions",
-    correct: "b"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint arr[5];\nstd::cout << arr[0];",
-    a: "0",
-    b: "Undefined behavior",
-    c: "Garbage value",
-    d: "5",
-    correct: "c"
-}, 
-{
-    question: "What is the purpose of the do-while loop in C++?",
-    a: "To execute a block of code repeatedly as long as a condition is true",
-    b: "To execute a block of code repeatedly until a condition becomes true",
-    c: "To execute a block of code once before checking the condition",
-    d: "To define custom functions",
-    correct: "a"
-},
-{
-    question: "What is the purpose of the static keyword in C++?",
-    a: "To define custom functions",
-    b: "To declare variables that are visible only within the function they are defined",
-    c: "To allocate memory dynamically",
-    d: "To perform arithmetic operations",
-    correct: "b"
-},
-{
-    question: "Which of the following is true about functions in C++?",
-    a: "Functions can only return a single value",
-    b: "Functions cannot call other functions",
-    c: "Functions can have multiple return statements",
-    d: "Functions cannot have parameters",
-    correct: "c"
-},
-{
-    question: "What is the purpose of recursion in C++?",
-    a: "To define custom functions",
-    b: "To execute a block of code repeatedly until a condition becomes true",
-    c: "To call a function from within the same function",
-    d: "To allocate memory dynamically",
-    correct: "c"
-},
-{
-    question: "What is the purpose of the void data type in C++?",
-    a: "To specify that a function does not return any value",
-    b: "To declare variables with an unknown data type",
-    c: "To define custom functions",
-    d: "To perform arithmetic operations",
-    correct: "a"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint x = 10;\nint *ptr = &x;\nstd::cout << *ptr;",
-    a: "10",
-    b: "0",
-    c: "Error",
-    d: "Undefined behavior",
-    correct: "a"
-},
-{
-    question: "What is the purpose of the new keyword in C++?",
-    a: "To perform arithmetic operations",
-    b: "To allocate memory dynamically",
-    c: "To read input from the user",
-    d: "To define custom functions",
-    correct: "b"
-},
-{
-    question: "What is the purpose of the delete keyword in C++?",
-    a: "To perform arithmetic operations",
-    b: "To deallocate memory previously allocated by new",
-    c: "To read input from the user",
-    d: "To define custom functions",
-    correct: "b"
-},
-{
-    question: "Which of the following is NOT a standard library function in C++?",
-    a: "cin()",
-    b: "cout()",
-    c: "strlen()",
-    d: "input()",
-    correct: "d"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint x = 5;\nint *ptr = &x;\nstd::cout << ptr;",
-    a: "5",
-    b: "0",
-    c: "Address of x",
-    d: "Undefined behavior",
-    correct: "c"
-},
-{
-    question: "What is the purpose of the typedef keyword in C++?",
-    a: "To perform arithmetic operations",
-    b: "To define custom data types",
-    c: "To read input from the user",
-    d: "To declare variables with an unknown data type",
-    correct: "b"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint x = 5;\nint *ptr = &x;\nstd::cout << ptr;",
-    a: "5",
-    b: "0",
-    c: "Address of x",
-    d: "Undefined behavior",
-    correct: "c"
-},
-{
-    question: "What is the purpose of the #include directive in C++?",
-    a: "To perform arithmetic operations",
-    b: "To include the contents of a header file",
-    c: "To read input from the user",
-    d: "To define custom functions",
-    correct: "b"
-},
-{
-    question: "Which of the following is true about structures in C++?",
-    a: "Structures cannot contain functions",
-    b: "Structures cannot contain other structures",
-    c: "Structures cannot have members of different data types",
-    d: "Structures can have members of different data types",
-    correct: "d"
-},
-{
-    question: "What is the purpose of the const keyword in C++?",
-    a: "To define custom functions",
-    b: "To declare constants",
-    c: "To perform arithmetic operations",
-    d: "To allocate memory dynamically",
-    correct: "b"
-},
-// Add more questions here...
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
+
+//Questions and Options array
+
+const quizArray = [
+    {
+        id: "1",
+        question: "What does the following C++ code print?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 5;\n    cout << x++ << endl;\n    return 0;\n}",
+        options: [
+            "5",
+            "6",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "5"
+    },
+    {
+        id: "2",
+        question: "Which of the following is not a valid C++ keyword?",
+        options: [
+            "new",
+            "this",
+            "delete",
+            "function"
+        ],
+        correct: "function"
+    },
+    {
+        id: "3",
+        question: "What is the result of the expression '5 + 3 * 2' in C++?",
+        options: [
+            "16",
+            "11",
+            "13",
+            "18"
+        ],
+        correct: "11"
+    },
+    {
+        id: "4",
+        question: "Which of the following is the correct way to declare a pointer in C++?",
+        options: [
+            "int* x;",
+            "int x*;",
+            "pointer int x;",
+            "x int*;"
+        ],
+        correct: "int* x;"
+    },
+    {
+        id: "5",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    cout << sizeof(char) << endl;\n    return 0;\n}",
+        options: [
+            "1",
+            "2",
+            "4",
+            "Compiler Error"
+        ],
+        correct: "1"
+    },
+    {
+        id: "6",
+        question: "What is the correct way to comment multiple lines in C++?",
+        options: [
+            "// This is a comment",
+            "/* This is a comment */",
+            "<!-- This is a comment -->",
+            "## This is a comment ##"
+        ],
+        correct: "/* This is a comment */"
+    },
+    {
+        id: "7",
+        question: "Which operator is used to allocate memory for a variable in C++?",
+        options: [
+            "alloc",
+            "new",
+            "malloc",
+            "allocate"
+        ],
+        correct: "new"
+    },
+    {
+        id: "8",
+        question: "What does the 'endl' manipulator do in C++?",
+        options: [
+            "Ends the program",
+            "Ends the line and flushes the buffer",
+            "Ends the loop",
+            "Ends the function"
+        ],
+        correct: "Ends the line and flushes the buffer"
+    },
+    {
+        id: "9",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 10;\n    cout << x / 3 << endl;\n    return 0;\n}",
+        options: [
+            "3",
+            "3.33",
+            "3.0",
+            "Compiler Error"
+        ],
+        correct: "3"
+    },
+    {
+        id: "10",
+        question: "Which of the following is not a valid C++ variable name?",
+        options: [
+            "my_variable",
+            "_myVariable",
+            "123variable",
+            "variable123"
+        ],
+        correct: "123variable"
+    },
+    {
+        id: "11",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 5;\n    int y = 10;\n    cout << x + y << endl;\n    return 0;\n}",
+        options: [
+            "510",
+            "15",
+            "5 + 10",
+            "Compiler Error"
+        ],
+        correct: "15"
+    },
+    {
+        id: "12",
+        question: "Which C++ keyword is used to define a class?",
+        options: [
+            "class",
+            "define",
+            "struct",
+            "create"
+        ],
+        correct: "class"
+    },
+    {
+        id: "13",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int arr[] = {1, 2, 3};\n    cout << arr[1] << endl;\n    return 0;\n}",
+        options: [
+            "1",
+            "2",
+            "3",
+            "Compiler Error"
+        ],
+        correct: "2"
+    },
+    {
+        id: "14",
+        question: "What is the correct way to initialize an array in C++?",
+        options: [
+            "int arr[] = {1, 2, 3};",
+            "arr[] = {1, 2, 3};",
+            "int arr[3]; arr = {1, 2, 3};",
+            "int arr[3] = {1, 2, 3};"
+        ],
+        correct: "int arr[] = {1, 2, 3};"
+    },
+    {
+        id: "15",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    cout << \"Hello, \" << \"world!\" << endl;\n    return 0;\n}",
+        options: [
+            "Hello, world!",
+            "Hello,",
+            "world!",
+            "Compiler Error"
+        ],
+        correct: "Hello, world!"
+    },
+    {
+        id: "16",
+        question: "Which C++ keyword is used to declare a function?",
+        options: [
+            "method",
+            "func",
+            "define",
+            "function"
+        ],
+        correct: "function"
+    },
+    {
+        id: "17",
+        question: "What is the correct way to declare a constant variable in C++?",
+        options: [
+            "const int x = 5;",
+            "constant int x = 5;",
+            "int const x = 5;",
+            "int x = const 5;"
+        ],
+        correct: "const int x = 5;"
+    },
+    {
+        id: "18",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    cout << (5 > 3) << endl;\n    return 0;\n}",
+        options: [
+            "True",
+            "False",
+            "1",
+            "0"
+        ],
+        correct: "1"
+    },
+    {
+        id: "19",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int& ref = x;\n    cout << ref << endl;\n    return 0;\n}",
+        options: [
+            "10",
+            "Reference Error",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "10"
+    },
+    {
+        id: "20",
+        question: "Which C++ keyword is used to exit from a loop or switch case block?",
+        options: [
+            "exit",
+            "break",
+            "end",
+            "stop"
+        ],
+        correct: "break"
+    },
+    {
+        id: "21",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 5;\n    int y = 2;\n    cout << x % y << endl;\n    return 0;\n}",
+        options: [
+            "2",
+            "2.5",
+            "0.5",
+            "1"
+        ],
+        correct: "1"
+    },
+    {
+        id: "22",
+        question: "What is the correct syntax to define a class method outside the class in C++?",
+        options: [
+            "void MyClass::myMethod() {}",
+            "void MyClass.myMethod() {}",
+            "void myMethod()::MyClass {}",
+            "void myMethod() MyClass:: {}"
+        ],
+        correct: "void MyClass::myMethod() {}"
+    },
+    {
+        id: "23",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int y = 20;\n    int* ptr = &x;\n    cout << *ptr << endl;\n    *ptr = 30;\n    cout << x << endl;\n    return 0;\n}",
+        options: [
+            "10 30",
+            "20 30",
+            "10 20",
+            "Compiler Error"
+        ],
+        correct: "10 30"
+    },
+    {
+        id: "24",
+        question: "What is the purpose of the 'const' qualifier in a function declaration?",
+        options: [
+            "To specify that the function returns a constant value",
+            "To specify that the function cannot be overloaded",
+            "To specify that the function parameters are constant",
+            "To specify that the function does not modify the object"
+        ],
+        correct: "To specify that the function does not modify the object"
+    },
+    {
+        id: "25",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 5;\n    cout << x << endl;\n    x++;\n    cout << x << endl;\n    return 0;\n}",
+        options: [
+            "5 6",
+            "6 5",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "5 6"
+    },
+    {
+        id: "26",
+        question: "What is the purpose of the 'sizeof' operator in C++?",
+        options: [
+            "To determine the size of a data type",
+            "To determine the memory address of a variable",
+            "To determine the type of a variable",
+            "To determine the number of elements in an array"
+        ],
+        correct: "To determine the size of a data type"
+    },
+    {
+        id: "27",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    char str[] = \"Hello\";\n    cout << str[5] << endl;\n    return 0;\n}",
+        options: [
+            "H",
+            "e",
+            "l",
+            "Compiler Error"
+        ],
+        correct: "Compiler Error"
+    },
+    {
+        id: "28",
+        question: "What is the correct syntax to access the 'myVar' member variable of an object 'obj' of class 'MyClass'?",
+        options: [
+            "obj.myVar",
+            "obj->myVar",
+            "obj::myVar",
+            "obj->MyClass.myVar"
+        ],
+        correct: "obj.myVar"
+    },
+    {
+        id: "29",
+        question: "What is the output of the following code?\n\n#include iostream\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int* ptr = &x;\n    cout << ptr << endl;\n    return 0;\n}",
+        options: [
+            "10",
+            "10 10",
+            "Memory Address of x",
+            "Compiler Error"
+        ],
+        correct: "Memory Address of x"
+    },
+    {
+        id: "30",
+        question: "What is the purpose of the 'static' keyword in C++?",
+        options: [
+            "To specify that a variable can only be accessed within a function",
+            "To specify that a function cannot be called recursively",
+            "To specify that a variable retains its value between function calls",
+            "To specify that a variable cannot be modified after initialization"
+        ],
+        correct: "To specify that a variable retains its value between function calls"
+    },
 ];
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
-    }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
 
-document.querySelector("#submit").addEventListener(
+
+
+
+
+//Restart Quiz
+restart.addEventListener("click", () => {
+    initial();
+    displayContainer.classList.remove("hide");
+    scoreContainer.classList.add("hide");
+});
+
+//Next Button
+nextBtn.addEventListener(
     "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
+    (displayNext = () => {
+        //increment questionCount
+        questionCount += 1;
+        //if last question
+        if (questionCount == quizArray.length) {
+            //hide question container and display score
+            displayContainer.classList.add("hide");
+            scoreContainer.classList.remove("hide");
+            //user score
+            userScore.innerHTML =
+                "Your score is " + scoreCount + " out of " + questionCount;
         } else {
-            incorrect++;
+            //display questionCount
+            countOfQuestion.innerHTML =
+                questionCount + 1 + " of " + quizArray.length + " Question";
+            //display quiz
+            quizDisplay(questionCount);
+            count = 11;
+            clearInterval(countdown);
+            timerDisplay();
         }
-        index++;
-        loadQuestion()
+    })
+);
+
+//Timer
+const timerDisplay = () => {
+    countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+            clearInterval(countdown);
+            displayNext();
+        }
+    }, 1000);
+};
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+    let quizCards = document.querySelectorAll(".container-mid");
+    //Hide other cards
+    quizCards.forEach((card) => {
+        card.classList.add("hide");
+    });
+    //display current question card
+    quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+    //randomly sort questions
+    quizArray.sort(() => Math.random() - 0.5);
+    //generate quiz
+    for (let i of quizArray) {
+        //randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+        //quiz card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+        //question number
+        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        //question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        //options
+        div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+        quizContainer.appendChild(div);
     }
-)
+}
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+    let userSolution = userOption.innerText;
+    let question = document.getElementsByClassName("container-mid")[questionCount];
+    let options = question.querySelectorAll(".option-div");
+
+    // For marking the correct option
+    options.forEach((element) => {
+        if (element.innerText == quizArray[questionCount].correct) {
+            element.classList.add("correct");
         }
-    )
-    return ans;
+    });
+
+    // Mark the user's selected option as incorrect and change its color to red
+    userOption.classList.add("incorrect");
+
+    // Clear interval (stop timer)
+    clearInterval(countdown);
+
+    // Disable all options
+    options.forEach((element) => {
+        element.disabled = true;
+    });
+
+    // Increment the score if the user's answer was initially correct
+    if (userSolution == quizArray[questionCount].correct) {
+        scoreCount++;
+    }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//initial setup
+function initial() {
+    quizContainer.innerHTML = "";
+    questionCount = 0;
+    scoreCount = 0;
+    count = 11;
+    clearInterval(countdown);
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//when user click on start button
+startButton.addEventListener("click", () => {
+    startScreen.classList.add("hide");
+    displayContainer.classList.remove("hide");
+    initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+    startScreen.classList.remove("hide");
+    displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+    document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
 }
-loadQuestion(index);
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Close the current tab
+        window.close();
+    }
+});

@@ -1,309 +1,503 @@
-const quizData = [
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
+
+//Questions and Options array
+
+const quizArray = [
     {
-        question: 'What is Swift?',
-        a: 'A programming language developed by Google',
-        b: 'A programming language developed by Apple',
-        c: 'A scripting language for web development',
-        d: 'A database management system',
-        correct: 'b'
+        id: "1",
+        question: "What is Swift?",
+        options: [
+            "A programming language developed by Apple",
+            "A database management system",
+            "A web server",
+            "A markup language"
+        ],
+        correct: "A programming language developed by Apple"
     },
     {
-        question: 'Which of the following statements is true about Optionals in Swift?',
-        a: 'Optionals can only contain nil values',
-        b: 'Optionals must be explicitly unwrapped to access their value',
-        c: 'Optionals can represent a value that is either present or absent',
-        d: 'Optionals are not supported in Swift',
-        correct: 'c'
+        id: "2",
+        question: "Who developed Swift?",
+        options: [
+            "Apple Inc.",
+            "Google",
+            "Microsoft",
+            "Oracle"
+        ],
+        correct: "Apple Inc."
     },
     {
-        question: 'What keyword is used to define a constant in Swift?',
-        a: 'let',
-        b: 'var',
-        c: 'const',
-        d: 'final',
-        correct: 'a'
+        id: "3",
+        question: "Which of the following statements about Swift is true?",
+        options: [
+            "It is statically typed",
+            "It is dynamically typed",
+            "It is weakly typed",
+            "It is not a typed language"
+        ],
+        correct: "It is statically typed"
     },
     {
-        question: 'Which data type in Swift is used to store a single character?',
-        a: 'Char',
-        b: 'Character',
-        c: 'String',
-        d: 'Byte',
-        correct: 'b'
+        id: "4",
+        question: "Which symbol is used to declare a constant in Swift?",
+        options: [
+            "let",
+            "var",
+            "#define",
+            "const"
+        ],
+        correct: "let"
     },
     {
-        question: 'What does the "guard" statement do in Swift?',
-        a: 'Creates a loop',
-        b: 'Unwraps an Optional value',
-        c: 'Exits the current scope if a condition is not met',
-        d: 'Defines a closure',
-        correct: 'c'
+        id: "5",
+        question: "Which keyword is used to define a function in Swift?",
+        options: [
+            "func",
+            "function",
+            "def",
+            "define"
+        ],
+        correct: "func"
     },
     {
-        question: 'What is the purpose of an initializer in Swift?',
-        a: 'To define methods',
-        b: 'To allocate memory',
-        c: 'To set initial values for properties',
-        d: 'To declare variables',
-        correct: 'c'
+        id: "6",
+        question: "What is the main feature of Swift known for its safety and performance?",
+        options: [
+            "Optionals",
+            "Protocols",
+            "Generics",
+            "ARC (Automatic Reference Counting)"
+        ],
+        correct: "Optionals"
     },
     {
-        question: 'What is a closure in Swift?',
-        a: 'A control flow statement',
-        b: 'A function without a name',
-        c: 'A block of code that can be passed around and executed later',
-        d: 'A data structure',
-        correct: 'c'
+        id: "7",
+        question: "What is the purpose of an optional in Swift?",
+        options: [
+            "To represent a value that may or may not exist",
+            "To define a protocol",
+            "To handle errors",
+            "To perform automatic memory management"
+        ],
+        correct: "To represent a value that may or may not exist"
     },
     {
-        question: 'Which Swift keyword is used to start a loop?',
-        a: 'for',
-        b: 'loop',
-        c: 'while',
-        d: 'repeat',
-        correct: 'a'
+        id: "8",
+        question: "Which operator is used for optional chaining in Swift?",
+        options: [
+            "?.",
+            "??",
+            "!.",
+            "//"
+        ],
+        correct: "?."
     },
     {
-        question: 'What is the purpose of the "defer" keyword in Swift?',
-        a: 'To execute a block of code only if a condition is true',
-        b: 'To delay the execution of a block of code until the end of the current scope',
-        c: 'To stop the execution of a loop',
-        d: 'To define a constant',
-        correct: 'b'
+        id: "9",
+        question: "What does ARC stand for in Swift?",
+        options: [
+            "Automatic Reference Counting",
+            "Automatic Resource Cleanup",
+            "Automatic Retain Cycle",
+            "Advanced Runtime Compiler"
+        ],
+        correct: "Automatic Reference Counting"
     },
     {
-        question: 'What is the purpose of the "break" statement in Swift?',
-        a: 'To exit a loop or switch statement',
-        b: 'To resume execution at the next iteration of a loop',
-        c: 'To jump to a specific label within a loop',
-        d: 'To terminate the program',
-        correct: 'a'
+        id: "10",
+        question: "Which collection type in Swift is unordered and does not allow duplicate values?",
+        options: [
+            "Set",
+            "Array",
+            "Dictionary",
+            "Tuple"
+        ],
+        correct: "Set"
     },
     {
-        question: 'Which Swift data type is used to store a collection of ordered values?',
-        a: 'Array',
-        b: 'Set',
-        c: 'Dictionary',
-        d: 'Tuple',
-        correct: 'a'
+        id: "11",
+        question: "What is a closure in Swift?",
+        options: [
+            "A self-contained block of functionality",
+            "An instance of a class",
+            "A property of a struct",
+            "A protocol"
+        ],
+        correct: "A self-contained block of functionality"
     },
     {
-        question: 'What is the purpose of the "enum" keyword in Swift?',
-        a: 'To define a class',
-        b: 'To define a structure',
-        c: 'To define an enumeration',
-        d: 'To define a protocol',
-        correct: 'c'
+        id: "12",
+        question: "What is the purpose of the `guard` statement in Swift?",
+        options: [
+            "To transfer control out of a scope if a condition is not met",
+            "To handle errors",
+            "To define a protocol",
+            "To define a class"
+        ],
+        correct: "To transfer control out of a scope if a condition is not met"
     },
     {
-        question: 'What is a protocol in Swift?',
-        a: 'A collection of properties and methods that describe a particular task or functionality',
-        b: 'A block of code that can be passed around and executed later',
-        c: 'A keyword used to define an object',
-        d: 'A special kind of class',
-        correct: 'a'
+        id: "13",
+        question: "Which Swift feature is used to avoid retain cycles between objects?",
+        options: [
+            "Weak references",
+            "Strong references",
+            "Retain cycles",
+            "Memory management"
+        ],
+        correct: "Weak references"
     },
     {
-        question: 'Which Swift keyword is used to indicate that a property or method can be overridden in a subclass?',
-        a: 'override',
-        b: 'virtual',
-        c: 'extend',
-        d: 'super',
-        correct: 'a'
+        id: "14",
+        question: "What is the purpose of the `defer` statement in Swift?",
+        options: [
+            "To execute code just before leaving the current scope",
+            "To handle errors",
+            "To define a protocol",
+            "To define a class"
+        ],
+        correct: "To execute code just before leaving the current scope"
     },
     {
-        question: 'What does the "super" keyword refer to in Swift?',
-        a: 'The base class',
-        b: 'The current class',
-        c: 'The derived class',
-        d: 'The parent class',
-        correct: 'd'
+        id: "15",
+        question: "Which Swift feature is used for extending the functionality of an existing type?",
+        options: [
+            "Extensions",
+            "Subclassing",
+            "Protocols",
+            "Generics"
+        ],
+        correct: "Extensions"
     },
     {
-        question: 'What is the purpose of the "extension" keyword in Swift?',
-        a: 'To create a new subclass',
-        b: 'To add functionality to an existing class, structure, enumeration, or protocol',
-        c: 'To define a closure',
-        d: 'To handle errors',
-        correct: 'b'
+        id: "16",
+        question: "What is a protocol in Swift?",
+        options: [
+            "A blueprint of methods and properties",
+            "A type of data structure",
+            "A statement",
+            "A programming language feature"
+        ],
+        correct: "A blueprint of methods and properties"
     },
     {
-        question: 'What is the syntax for creating a function in Swift?',
-        a: 'func functionName() -> ReturnType { }',
-        b: 'function functionName() -> ReturnType { }',
-        c: 'def functionName() -> ReturnType { }',
-        d: 'method functionName() -> ReturnType { }',
-        correct: 'a'
+        id: "17",
+        question: "Which Swift feature is used to ensure that all requirements of a protocol are met?",
+        options: [
+            "Protocol conformance",
+            "Protocol inheritance",
+            "Protocol extension",
+            "Protocol declaration"
+        ],
+        correct: "Protocol conformance"
     },
     {
-        question: 'What is the purpose of the "inout" keyword in Swift function parameters?',
-        a: 'To indicate that a parameter can be modified by the function',
-        b: 'To indicate that a parameter cannot be modified by the function',
-        c: 'To indicate that a parameter is optional',
-        d: 'To indicate that a parameter is required',
-        correct: 'a'
+        id: "18",
+        question: "What is a typealias in Swift?",
+        options: [
+            "An alias for an existing type",
+            "A type of data structure",
+            "A statement",
+            "A protocol"
+        ],
+        correct: "An alias for an existing type"
     },
     {
-        question: 'Which Swift keyword is used to handle errors?',
-        a: 'error',
-        b: 'try',
-        c: 'catch',
-        d: 'throw',
-        correct: 'b'
+        id: "19",
+        question: "What is the purpose of the `inout` keyword in Swift function parameters?",
+        options: [
+            "To pass a parameter by reference",
+            "To define a protocol",
+            "To handle errors",
+            "To define a class"
+        ],
+        correct: "To pass a parameter by reference"
     },
     {
-        question: 'What is the purpose of the "as" keyword in Swift?',
-        a: 'To create an alias for a type',
-        b: 'To cast an instance to a different type',
-        c: 'To define a closure',
-        d: 'To define a protocol',
-        correct: 'b'
+        id: "20",
+        question: "Which Swift feature is used to represent multiple values in a single compound value?",
+        options: [
+            "Tuple",
+            "Set",
+            "Array",
+            "Dictionary"
+        ],
+        correct: "Tuple"
     },
     {
-        question: 'What is the purpose of the "subscript" keyword in Swift?',
-        a: 'To access elements of a collection using index values',
-        b: 'To define a new subclass',
-        c: 'To handle errors',
-        d: 'To override a property or method',
-        correct: 'a'
+        id: "21",
+        question: "What is the purpose of the `@escaping` attribute in Swift?",
+        options: [
+            "To indicate that a closure can escape the current scope",
+            "To define a protocol",
+            "To handle errors",
+            "To define a class"
+        ],
+        correct: "To indicate that a closure can escape the current scope"
     },
     {
-        question: 'What is the purpose of the "associatedtype" keyword in Swift?',
-        a: 'To define an associated value for an enumeration case',
-        b: 'To define a typealias for a type',
-        c: 'To define a generic type constraint',
-        d: 'To define an associated type for a protocol',
-        correct: 'd'
+        id: "22",
+        question: "Which keyword is used to create an instance of a class in Swift?",
+        options: [
+            "init",
+            "new",
+            "alloc",
+            "instance"
+        ],
+        correct: "init"
     },
     {
-        question: 'What is the purpose of the "mutating" keyword in Swift?',
-        a: 'To indicate that a method can modify the properties of a value type',
-        b: 'To indicate that a method cannot modify the properties of a value type',
-        c: 'To indicate that a method can modify the properties of a reference type',
-        d: 'To indicate that a method cannot modify the properties of a reference type',
-        correct: 'a'
+        id: "23",
+        question: "What is the purpose of the `lazy` keyword in Swift?",
+        options: [
+            "To delay the initialization of a property until its first use",
+            "To handle errors",
+            "To define a protocol",
+            "To define a class"
+        ],
+        correct: "To delay the initialization of a property until its first use"
     },
     {
-        question: 'Which Swift keyword is used to prevent a property from being overridden in a subclass?',
-        a: 'final',
-        b: 'override',
-        c: 'static',
-        d: 'const',
-        correct: 'a'
+        id: "24",
+        question: "What is the purpose of the `public` keyword in Swift?",
+        options: [
+            "To specify access level",
+            "To define a protocol",
+            "To handle errors",
+            "To define a class"
+        ],
+        correct: "To specify access level"
     },
     {
-        question: 'What is the purpose of the "weak" keyword in Swift?',
-        a: 'To indicate that a reference to an object can become nil',
-        b: 'To prevent a reference cycle in closures',
-        c: 'To indicate that a reference to an object cannot be modified',
-        d: 'To define a weakly referenced variable',
-        correct: 'a'
+        id: "25",
+        question: "What is the purpose of the `private` keyword in Swift?",
+        options: [
+            "To restrict access to an entity to its containing declaration",
+            "To define a protocol",
+            "To handle errors",
+            "To define a class"
+        ],
+        correct: "To restrict access to an entity to its containing declaration"
     },
     {
-        question: 'What is the purpose of the "unowned" keyword in Swift?',
-        a: 'To indicate that a reference to an object can become nil',
-        b: 'To prevent a reference cycle in closures',
-        c: 'To indicate that a reference to an object cannot be modified',
-        d: 'To define an unowned reference to an object',
-        correct: 'd'
+        id: "26",
+        question: "Which operator is used to unwrap an optional in Swift?",
+        options: [
+            "!",
+            "?",
+            "&",
+            "$"
+        ],
+        correct: "!"
     },
     {
-        question: 'What is the purpose of the "lazy" keyword in Swift?',
-        a: 'To indicate that a property is only computed once and then cached',
-        b: 'To indicate that a property is computed asynchronously',
-        c: 'To define a lazy evaluation closure',
-        d: 'To indicate that a property is private',
-        correct: 'a'
+        id: "27",
+        question: "What is the purpose of the `is` keyword in Swift?",
+        options: [
+            "To check if an instance is of a certain type",
+            "To define a protocol",
+            "To handle errors",
+            "To define a class"
+        ],
+        correct: "To check if an instance is of a certain type"
     },
     {
-        question: 'What is the purpose of the "protocol composition" in Swift?',
-        a: 'To define a protocol extension',
-        b: 'To define a union of multiple protocols',
-        c: 'To define a type alias for a protocol',
-        d: 'To define a nested protocol',
-        correct: 'b'
+        id: "28",
+        question: "What is the purpose of the `as` keyword in Swift?",
+        options: [
+            "To perform type casting",
+            "To define a protocol",
+            "To handle errors",
+            "To define a class"
+        ],
+        correct: "To perform type casting"
     },
     {
-        question: 'Which Swift feature is used to ensure that a piece of code is executed only once?',
-        a: 'Singleton',
-        b: 'Protocol composition',
-        c: 'Computed property',
-        d: 'Lazy initialization',
-        correct: 'a'
+        id: "29",
+        question: "Which Swift feature is used to handle errors?",
+        options: [
+            "Error handling with try, catch, and throw",
+            "Optionals",
+            "Protocols",
+            "Closures"
+        ],
+        correct: "Error handling with try, catch, and throw"
     },
     {
-        question: 'What is the purpose of the "guard let" statement in Swift?',
-        a: 'To declare a new constant or variable',
-        b: 'To unwrap an Optional value safely and continue execution if it contains a value',
-        c: 'To define a new closure',
-        d: 'To handle errors in asynchronous code',
-        correct: 'b'
+        id: "30",
+        question: "What is the purpose of the `switch` statement in Swift?",
+        options: [
+            "To make decisions based on multiple possible conditions",
+            "To define a protocol",
+            "To handle errors",
+            "To define a class"
+        ],
+        correct: "To make decisions based on multiple possible conditions"
     }
-    
 ];
 
 
+//Restart Quiz
+restart.addEventListener("click", () => {
+    initial();
+    displayContainer.classList.remove("hide");
+    scoreContainer.classList.add("hide");
+});
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
-    }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
-
-document.querySelector("#submit").addEventListener(
+//Next Button
+nextBtn.addEventListener(
     "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
+    (displayNext = () => {
+        //increment questionCount
+        questionCount += 1;
+        //if last question
+        if (questionCount == quizArray.length) {
+            //hide question container and display score
+            displayContainer.classList.add("hide");
+            scoreContainer.classList.remove("hide");
+            //user score
+            userScore.innerHTML =
+                "Your score is " + scoreCount + " out of " + questionCount;
         } else {
-            incorrect++;
+            //display questionCount
+            countOfQuestion.innerHTML =
+                questionCount + 1 + " of " + quizArray.length + " Question";
+            //display quiz
+            quizDisplay(questionCount);
+            count = 11;
+            clearInterval(countdown);
+            timerDisplay();
         }
-        index++;
-        loadQuestion()
+    })
+);
+
+//Timer
+const timerDisplay = () => {
+    countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+            clearInterval(countdown);
+            displayNext();
+        }
+    }, 1000);
+};
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+    let quizCards = document.querySelectorAll(".container-mid");
+    //Hide other cards
+    quizCards.forEach((card) => {
+        card.classList.add("hide");
+    });
+    //display current question card
+    quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+    //randomly sort questions
+    quizArray.sort(() => Math.random() - 0.5);
+    //generate quiz
+    for (let i of quizArray) {
+        //randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+        //quiz card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+        //question number
+        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        //question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        //options
+        div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+        quizContainer.appendChild(div);
     }
-)
+}
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+    let userSolution = userOption.innerText;
+    let question = document.getElementsByClassName("container-mid")[questionCount];
+    let options = question.querySelectorAll(".option-div");
+
+    // For marking the correct option
+    options.forEach((element) => {
+        if (element.innerText == quizArray[questionCount].correct) {
+            element.classList.add("correct");
         }
-    )
-    return ans;
+    });
+
+    // Mark the user's selected option as incorrect and change its color to red
+    userOption.classList.add("incorrect");
+
+    // Clear interval (stop timer)
+    clearInterval(countdown);
+
+    // Disable all options
+    options.forEach((element) => {
+        element.disabled = true;
+    });
+
+    // Increment the score if the user's answer was initially correct
+    if (userSolution == quizArray[questionCount].correct) {
+        scoreCount++;
+    }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//initial setup
+function initial() {
+    quizContainer.innerHTML = "";
+    questionCount = 0;
+    scoreCount = 0;
+    count = 11;
+    clearInterval(countdown);
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//when user click on start button
+startButton.addEventListener("click", () => {
+    startScreen.classList.add("hide");
+    displayContainer.classList.remove("hide");
+    initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+    startScreen.classList.remove("hide");
+    displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+    document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
 }
-loadQuestion(index);
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Close the current tab
+        window.close();
+    }
+});

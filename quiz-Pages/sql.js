@@ -1,309 +1,504 @@
-const quizData = [
-    {
-        question: 'What does SQL stand for?',
-        a: 'Structured Query Language',
-        b: 'Sequential Query Language',
-        c: 'System Query Language',
-        d: 'Structured Question Language',
-        correct: 'a'
-    },
-    {
-        question: 'Which keyword is used to retrieve data from a SQL database?',
-        a: 'FETCH',
-        b: 'RETRIEVE',
-        c: 'SELECT',
-        d: 'GET',
-        correct: 'c'
-    },
-    {
-        question: 'Which SQL clause is used to filter rows based on a specified condition?',
-        a: 'FILTER',
-        b: 'HAVING',
-        c: 'WHERE',
-        d: 'CONDITION',
-        correct: 'c'
-    },
-    {
-        question: 'Which SQL statement is used to insert new data into a database?',
-        a: 'ADD',
-        b: 'INSERT',
-        c: 'CREATE',
-        d: 'UPDATE',
-        correct: 'b'
-    },
-    {
-        question: 'Which SQL command is used to change data in a database?',
-        a: 'MODIFY',
-        b: 'CHANGE',
-        c: 'ALTER',
-        d: 'UPDATE',
-        correct: 'd'
-    },
-    {
-        question: 'Which SQL function is used to return the current date and time in a database?',
-        a: 'NOW()',
-        b: 'CURRENT_DATE()',
-        c: 'GETDATE()',
-        d: 'DATE()',
-        correct: 'a'
-    },
-    {
-        question: 'What is the result of the SQL expression 5 + NULL?',
-        a: '5',
-        b: 'NULL',
-        c: 'Error',
-        d: '0',
-        correct: 'b'
-    },
-    {
-        question: 'Which SQL keyword is used to sort the result set in ascending order?',
-        a: 'ORDER BY ASC',
-        b: 'ASCENDING',
-        c: 'ASC',
-        d: 'SORT ASCENDING',
-        correct: 'c'
-    },
-    {
-        question: 'Which SQL operator is used to combine the result set of two or more SELECT statements?',
-        a: 'UNION',
-        b: 'COMBINE',
-        c: 'MERGE',
-        d: 'JOIN',
-        correct: 'a'
-    },
-    {
-        question: 'Which SQL command is used to delete all records from a table without removing the table itself?',
-        a: 'CLEAR',
-        b: 'DELETE',
-        c: 'REMOVE',
-        d: 'TRUNCATE',
-        correct: 'd'
-    },
-    {
-        question: 'Which SQL keyword is used to retrieve only unique values?',
-        a: 'DISTINCT',
-        b: 'UNIQUE',
-        c: 'ONLY',
-        d: 'SINGLE',
-        correct: 'a'
-    },
-    {
-        question: 'What is the purpose of the GROUP BY clause in SQL?',
-        a: 'To filter rows based on a specified condition',
-        b: 'To perform calculations on grouped data',
-        c: 'To sort the result set',
-        d: 'To join tables',
-        correct: 'b'
-    },
-    {
-        question: 'Which SQL function is used to count the number of rows in a result set?',
-        a: 'COUNT()',
-        b: 'SUM()',
-        c: 'TOTAL()',
-        d: 'ROWS()',
-        correct: 'a'
-    },
-    {
-        question: 'Which SQL command is used to change the structure of a table?',
-        a: 'ALTER TABLE',
-        b: 'CHANGE TABLE',
-        c: 'MODIFY TABLE',
-        d: 'UPDATE TABLE',
-        correct: 'a'
-    },
-    {
-        question: 'What is the primary key in a SQL table?',
-        a: 'A key that uniquely identifies each row in a table',
-        b: 'A key that is used for sorting data in a table',
-        c: 'A key that is used to join multiple tables',
-        d: 'A key that is used to index data in a table',
-        correct: 'a'
-    },
-    {
-        question: 'Which SQL command is used to retrieve data from multiple tables?',
-        a: 'SELECT',
-        b: 'JOIN',
-        c: 'COMBINE',
-        d: 'MERGE',
-        correct: 'b'
-    },
-    {
-        question: 'Which SQL clause is used to specify a condition for grouping rows when using the GROUP BY clause?',
-        a: 'HAVING',
-        b: 'GROUP CONDITION',
-        c: 'GROUP BY CONDITION',
-        d: 'WHERE',
-        correct: 'a'
-    },
-    {
-        question: 'Which SQL function is used to return the largest value of a selected column?',
-        a: 'MAX()',
-        b: 'LARGEST()',
-        c: 'TOP()',
-        d: 'BIGGEST()',
-        correct: 'a'
-    },
-    {
-        question: 'Which SQL command is used to add a new column to a table?',
-        a: 'ADD COLUMN',
-        b: 'ALTER TABLE',
-        c: 'INSERT COLUMN',
-        d: 'NEW COLUMN',
-        correct: 'a'
-    },
-    {
-        question: 'What is the result of the SQL expression 10 / 0?',
-        a: 'Error',
-        b: 'Infinity',
-        c: '0',
-        d: 'NULL',
-        correct: 'a'
-    },
-    {
-        question: 'Which SQL command is used to create a new database?',
-        a: 'CREATE DATABASE',
-        b: 'NEW DATABASE',
-        c: 'ADD DATABASE',
-        d: 'MAKE DATABASE',
-        correct: 'a'
-    },
-    {
-        question: 'What is the purpose of the WHERE clause in SQL?',
-        a: 'To specify the columns to be retrieved',
-        b: 'To filter rows based on a specified condition',
-        c: 'To sort the result set',
-        d: 'To group rows based on a specified condition',
-        correct: 'b'
-    },
-    {
-        question: 'Which SQL operator is used to specify multiple conditions in a WHERE clause?',
-        a: 'OR',
-        b: 'AND',
-        c: 'BOTH',
-        d: 'PLUS',
-        correct: 'b'
-    },
-    {
-        question: 'Which SQL keyword is used to rename a table?',
-        a: 'RENAME TABLE',
-        b: 'ALTER TABLE',
-        c: 'CHANGE TABLE',
-        d: 'RENAME',
-        correct: 'a'
-    },
-    {
-        question: 'Which SQL command is used to delete a table?',
-        a: 'DELETE TABLE',
-        b: 'DROP TABLE',
-        c: 'REMOVE TABLE',
-        d: 'DELETE',
-        correct: 'b'
-    },
-    {
-        question: 'What does the SQL statement "SELECT * FROM table_name" do?',
-        a: 'Selects all columns from the table',
-        b: 'Selects only the first row from the table',
-        c: 'Selects the last row from the table',
-        d: 'Selects a specific column from the table',
-        correct: 'a'
-    },
-    {
-       
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
 
- question: 'Which SQL command is used to modify data in a table?',
-        a: 'UPDATE',
-        b: 'MODIFY',
-        c: 'ALTER',
-        d: 'CHANGE',
-        correct: 'a'
+//Questions and Options array
+
+const quizArray = [
+    {
+        id: "1",
+        question: "What does SQL stand for?",
+        options: [
+            "Structured Query Language",
+            "Sequential Query Language",
+            "Structured Question Language",
+            "Sequential Question Language"
+        ],
+        correct: "Structured Query Language"
     },
     {
-        question: 'What is the result of the SQL expression 5 = "5"?',
-        a: 'TRUE',
-        b: 'FALSE',
-        c: 'ERROR',
-        d: 'NULL',
-        correct: 'a'
+        id: "2",
+        question: "Which SQL keyword is used to retrieve data from a database?",
+        options: [
+            "GET",
+            "RETRIEVE",
+            "SELECT",
+            "FETCH"
+        ],
+        correct: "SELECT"
     },
     {
-        question: 'Which SQL function is used to return the smallest value of a selected column?',
-        a: 'MIN()',
-        b: 'SMALLEST()',
-        c: 'BOTTOM()',
-        d: 'TINIEST()',
-        correct: 'a'
+        id: "3",
+        question: "Which SQL keyword is used to update data in a database?",
+        options: [
+            "UPDATE",
+            "MODIFY",
+            "CHANGE",
+            "ALTER"
+        ],
+        correct: "UPDATE"
     },
     {
-        question: 'What is the purpose of the ORDER BY clause in SQL?',
-        a: 'To filter rows based on a specified condition',
-        b: 'To group rows based on a specified condition',
-        c: 'To sort the result set',
-        d: 'To join tables',
-        correct: 'c'
+        id: "4",
+        question: "Which SQL keyword is used to delete data from a database?",
+        options: [
+            "REMOVE",
+            "DELETE",
+            "ERASE",
+            "DISCARD"
+        ],
+        correct: "DELETE"
+    },
+    {
+        id: "5",
+        question: "Which SQL keyword is used to add new data to a database?",
+        options: [
+            "ADD",
+            "INSERT",
+            "CREATE",
+            "NEW"
+        ],
+        correct: "INSERT"
+    },
+    {
+        id: "6",
+        question: "Which SQL keyword is used to create a new table?",
+        options: [
+            "CREATE TABLE",
+            "DEFINE TABLE",
+            "NEW TABLE",
+            "ADD TABLE"
+        ],
+        correct: "CREATE TABLE"
+    },
+    {
+        id: "7",
+        question: "Which SQL keyword is used to define the conditions for the rows to be selected in a query?",
+        options: [
+            "FILTER",
+            "CONDITION",
+            "WHERE",
+            "SELECT"
+        ],
+        correct: "WHERE"
+    },
+    {
+        id: "8",
+        question: "Which SQL keyword is used to sort the result set in ascending order?",
+        options: [
+            "ASC",
+            "SORT",
+            "ORDER BY",
+            "ASCENDING"
+        ],
+        correct: "ASC"
+    },
+    {
+        id: "9",
+        question: "Which SQL keyword is used to join two or more tables?",
+        options: [
+            "MERGE",
+            "JOIN",
+            "COMBINE",
+            "UNION"
+        ],
+        correct: "JOIN"
+    },
+    {
+        id: "10",
+        question: "Which SQL function is used to count the number of rows in a table?",
+        options: [
+            "COUNT()",
+            "SUM()",
+            "TOTAL()",
+            "NUM_ROWS()"
+        ],
+        correct: "COUNT()"
+    },
+    {
+        id: "11",
+        question: "Which SQL function is used to find the maximum value in a column?",
+        options: [
+            "MAX()",
+            "LARGEST()",
+            "TOP()",
+            "HIGHEST()"
+        ],
+        correct: "MAX()"
+    },
+    {
+        id: "12",
+        question: "Which SQL function is used to find the minimum value in a column?",
+        options: [
+            "MIN()",
+            "SMALLEST()",
+            "BOTTOM()",
+            "LOWEST()"
+        ],
+        correct: "MIN()"
+    },
+    {
+        id: "13",
+        question: "Which SQL function is used to find the average value in a column?",
+        options: [
+            "AVG()",
+            "MEAN()",
+            "AVERAGE()",
+            "TOTAL()"
+        ],
+        correct: "AVG()"
+    },
+    {
+        id: "14",
+        question: "Which SQL function is used to find the sum of values in a column?",
+        options: [
+            "SUM()",
+            "TOTAL()",
+            "ADD()",
+            "SUM_VALUES()"
+        ],
+        correct: "SUM()"
+    },
+    {
+        id: "15",
+        question: "Which SQL operator is used to select rows based on multiple conditions?",
+        options: [
+            "AND",
+            "OR",
+            "NOT",
+            "XOR"
+        ],
+        correct: "AND"
+    },
+    {
+        id: "16",
+        question: "Which SQL clause is used to filter rows based on a specified condition?",
+        options: [
+            "FILTER BY",
+            "CONDITION",
+            "WHERE",
+            "LIMIT"
+        ],
+        correct: "WHERE"
+    },
+    {
+        id: "17",
+        question: "Which SQL clause is used to sort the result set in descending order?",
+        options: [
+            "DESC",
+            "SORT",
+            "ORDER DESC",
+            "DESCENDING"
+        ],
+        correct: "DESC"
+    },
+    {
+        id: "18",
+        question: "Which SQL statement is used to remove duplicates from a result set?",
+        options: [
+            "REMOVE DUPLICATES",
+            "DISTINCT",
+            "UNIQUE",
+            "REMOVE REPEATS"
+        ],
+        correct: "DISTINCT"
+    },
+    {
+        id: "19",
+        question: "Which SQL statement is used to change data in a table?",
+        options: [
+            "MODIFY",
+            "CHANGE",
+            "UPDATE",
+            "ALTER"
+        ],
+        correct: "UPDATE"
+    },
+    {
+        id: "20",
+        question: "Which SQL statement is used to create a copy of an existing table?",
+        options: [
+            "CLONE TABLE",
+            "COPY TABLE",
+            "REPLICATE TABLE",
+            "CREATE TABLE AS"
+        ],
+        correct: "CREATE TABLE AS"
+    },
+    {
+        id: "21",
+        question: "Which SQL statement is used to combine the results of two or more SELECT statements?",
+        options: [
+            "COMBINE",
+            "UNION",
+            "MERGE",
+            "JOIN"
+        ],
+        correct: "UNION"
+    },
+    {
+        id: "22",
+        question: "Which SQL statement is used to retrieve data from more than one table?",
+        options: [
+            "FETCH",
+            "JOIN",
+            "MERGE",
+            "UNION"
+        ],
+        correct: "JOIN"
+    },
+    {
+        id: "23",
+        question: "Which SQL statement is used to delete all rows in a table?",
+        options: [
+            "DELETE ALL",
+            "DELETE",
+            "REMOVE",
+            "DROP"
+        ],
+        correct: "DELETE"
+    },
+    {
+        id: "24",
+        question: "Which SQL statement is used to permanently remove a table from the database?",
+        options: [
+            "DELETE TABLE",
+            "REMOVE TABLE",
+            "DROP TABLE",
+            "ERASE TABLE"
+        ],
+        correct: "DROP TABLE"
+    },
+    {
+        id: "25",
+        question: "Which SQL statement is used to define a constraint on a column?",
+        options: [
+            "CONSTRAINT",
+            "DEFINE",
+            "ENFORCE",
+            "ASSERT"
+        ],
+        correct: "CONSTRAINT"
+    },
+    {
+        id: "26",
+        question: "Which SQL statement is used to add a new column to a table?",
+        options: [
+            "ADD COLUMN",
+            "INSERT COLUMN",
+            "CREATE COLUMN",
+            "DEFINE COLUMN"
+        ],
+        correct: "ADD COLUMN"
+    },
+    {
+        id: "27",
+        question: "Which SQL statement is used to rename a table?",
+        options: [
+            "RENAME TABLE",
+            "ALTER TABLE",
+            "CHANGE TABLE",
+            "MODIFY TABLE"
+        ],
+        correct: "ALTER TABLE"
+    },
+    {
+        id: "28",
+        question: "Which SQL statement is used to change the data type of a column in a table?",
+        options: [
+            "CHANGE COLUMN",
+            "MODIFY COLUMN",
+            "ALTER COLUMN",
+            "REDEFINE COLUMN"
+        ],
+        correct: "ALTER COLUMN"
+    },
+    {
+        id: "29",
+        question: "Which SQL statement is used to define a primary key for a table?",
+        options: [
+            "DEFINE KEY",
+            "CREATE PRIMARY KEY",
+            "SET PRIMARY KEY",
+            "PRIMARY KEY"
+        ],
+        correct: "PRIMARY KEY"
+    },
+    {
+        id: "30",
+        question: "Which SQL statement is used to create an index on a table?",
+        options: [
+            "CREATE INDEX",
+            "DEFINE INDEX",
+            "SET INDEX",
+            "INDEX"
+        ],
+        correct: "CREATE INDEX"
     }
 ];
 
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
-    }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
 
-document.querySelector("#submit").addEventListener(
+//Restart Quiz
+restart.addEventListener("click", () => {
+    initial();
+    displayContainer.classList.remove("hide");
+    scoreContainer.classList.add("hide");
+});
+
+//Next Button
+nextBtn.addEventListener(
     "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
+    (displayNext = () => {
+        //increment questionCount
+        questionCount += 1;
+        //if last question
+        if (questionCount == quizArray.length) {
+            //hide question container and display score
+            displayContainer.classList.add("hide");
+            scoreContainer.classList.remove("hide");
+            //user score
+            userScore.innerHTML =
+                "Your score is " + scoreCount + " out of " + questionCount;
         } else {
-            incorrect++;
+            //display questionCount
+            countOfQuestion.innerHTML =
+                questionCount + 1 + " of " + quizArray.length + " Question";
+            //display quiz
+            quizDisplay(questionCount);
+            count = 11;
+            clearInterval(countdown);
+            timerDisplay();
         }
-        index++;
-        loadQuestion()
+    })
+);
+
+//Timer
+const timerDisplay = () => {
+    countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+            clearInterval(countdown);
+            displayNext();
+        }
+    }, 1000);
+};
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+    let quizCards = document.querySelectorAll(".container-mid");
+    //Hide other cards
+    quizCards.forEach((card) => {
+        card.classList.add("hide");
+    });
+    //display current question card
+    quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+    //randomly sort questions
+    quizArray.sort(() => Math.random() - 0.5);
+    //generate quiz
+    for (let i of quizArray) {
+        //randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+        //quiz card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+        //question number
+        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        //question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        //options
+        div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+        quizContainer.appendChild(div);
     }
-)
+}
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+    let userSolution = userOption.innerText;
+    let question = document.getElementsByClassName("container-mid")[questionCount];
+    let options = question.querySelectorAll(".option-div");
+
+    // For marking the correct option
+    options.forEach((element) => {
+        if (element.innerText == quizArray[questionCount].correct) {
+            element.classList.add("correct");
         }
-    )
-    return ans;
+    });
+
+    // Mark the user's selected option as incorrect and change its color to red
+    userOption.classList.add("incorrect");
+
+    // Clear interval (stop timer)
+    clearInterval(countdown);
+
+    // Disable all options
+    options.forEach((element) => {
+        element.disabled = true;
+    });
+
+    // Increment the score if the user's answer was initially correct
+    if (userSolution == quizArray[questionCount].correct) {
+        scoreCount++;
+    }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//initial setup
+function initial() {
+    quizContainer.innerHTML = "";
+    questionCount = 0;
+    scoreCount = 0;
+    count = 11;
+    clearInterval(countdown);
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//when user click on start button
+startButton.addEventListener("click", () => {
+    startScreen.classList.add("hide");
+    displayContainer.classList.remove("hide");
+    initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+    startScreen.classList.remove("hide");
+    displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+    document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
 }
-loadQuestion(index);
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Close the current tab
+        window.close();
+    }
+});

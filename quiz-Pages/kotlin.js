@@ -1,308 +1,507 @@
-const quizData = [
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
+
+//Questions and Options array
+
+const quizArray = [
     {
-        question: 'Which of the following is the correct way to declare a variable in Kotlin?',
-            a: 'variableName = value',
-            b: 'var variableName = value',
-            c: 'int variableName = value',
-            d: 'variableName',
-        correct: 'b'
+        id: "1",
+        question: "What does the following Kotlin code print?\n\nfun main() {\n    var x = 5\n    println(x++)\n}",
+        options: [
+            "5",
+            "6",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "5"
     },
     {
-        question: 'What is the purpose of the "public" access modifier in Kotlin?',
-            a: 'To restrict access to the class',
-            b: 'To make the class accessible only within the same package',
-            c: 'To make the class accessible from any other class',
-            d: 'To make the class abstract',
-        correct: 'c'
+        id: "2",
+        question: "Which of the following is not a valid Kotlin keyword?",
+        options: [
+            "class",
+            "interface",
+            "package",
+            "function"
+        ],
+        correct: "function"
     },
     {
-        question: 'Which of the following is NOT a valid data type in Kotlin?',
-            a: 'Double',
-            b: 'String',
-            c: 'Char',
-            d: 'Float*',
-        correct: 'd'
+        id: "3",
+        question: "What is the result of the expression '5 + 3 * 2' in Kotlin?",
+        options: [
+            "16",
+            "11",
+            "13",
+            "18"
+        ],
+        correct: "11"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val x = 5\n    val y = 2\n    println(x % y)\n}',
-            a: '1',
-            b: '2',
-            c: '2.5',
-            d: '3',
-        correct: 'a'
+        id: "4",
+        question: "Which of the following is the correct way to declare an array in Kotlin?",
+        options: [
+            "val arr = intArrayOf(1, 2, 3)",
+            "val arr = arrayOf(1, 2, 3)",
+            "val arr = [1, 2, 3]",
+            "val arr: IntArray = {1, 2, 3}"
+        ],
+        correct: "val arr = intArrayOf(1, 2, 3)"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val str = "Hello World!"\n    println(str.substring(6))\n}',
-            a: 'World!',
-            b: 'Hello',
-            c: 'World!Hello',
-            d: 'World',
-        correct: 'a'
+        id: "5",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    println(10 / 3)\n}",
+        options: [
+            "3",
+            "3.33",
+            "3.0",
+            "Compiler Error"
+        ],
+        correct: "3"
     },
     {
-        question: 'What is the purpose of the "private" access modifier in Kotlin?',
-            a: 'To restrict access to the class',
-            b: 'To make the class accessible only within the same package',
-            c: 'To make the class accessible from any other class',
-            d: 'To restrict access to the members within the same class',
-        correct: 'd'
+        id: "6",
+        question: "Which of the following is a valid way to declare a String variable in Kotlin?",
+        options: [
+            "val str = \"Hello\"",
+            "var str = String(\"Hello\")",
+            "var str: String = \"Hello\"",
+            "All of the above"
+        ],
+        correct: "All of the above"
     },
     {
-        question: 'Which of the following statements is true about Kotlin interfaces?',
-            a: 'Interfaces can contain implementations of methods',
-            b: 'Classes can implement multiple interfaces with the same method signatures',
-            c: 'Interfaces can extend multiple classes',
-            d: 'Interfaces can be instantiated using the new keyword',
-        correct: 'b'
+        id: "7",
+        question: "Which operator is used to allocate memory for an object in Kotlin?",
+        options: [
+            "alloc",
+            "new",
+            "malloc",
+            "allocate"
+        ],
+        correct: "new"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val str = "Hello"\n    println(str.concat(" World"))\n}',
-            a: 'Hello',
-            b: 'Hello World',
-            c: 'World',
-            d: 'null',
-        correct: 'a'
+        id: "8",
+        question: "What does the 'println' function do in Kotlin?",
+        options: [
+            "Prints a new line to the console",
+            "Prints a formatted line to the console",
+            "Prints a line without a newline character",
+            "Prints a line to a file"
+        ],
+        correct: "Prints a new line to the console"
     },
     {
-        question: 'Which keyword is used to prevent method overriding in Kotlin?',
-            a: 'override',
-            b: 'final',
-            c: 'static',
-            d: 'private',
-        correct: 'b'
+        id: "9",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val x = 10\n    println(x / 3)\n}",
+        options: [
+            "3",
+            "3.33",
+            "3.0",
+            "Compiler Error"
+        ],
+        correct: "3"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val arr = arrayOf(1, 2, 3, 4, 5)\n    println(arr.size)\n}',
-            a: '5',
-            b: '4',
-            c: 'Compilation error',
-            d: '0',
-        correct: 'a'
+        id: "10",
+        question: "Which of the following is not a valid Kotlin variable name?",
+        options: [
+            "myVariable",
+            "_myVariable",
+            "123Variable",
+            "variable123"
+        ],
+        correct: "123Variable"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    var x = 10\n    if (x > 5) {\n        println("x is greater than 5")\n    } else {\n        println("x is less than or equal to 5")\n    }\n}',
-            a: 'x is greater than 5',
-            b: 'x is less than 5',
-            c: 'x is less than or equal to 5',
-            d: 'Compilation error',
-        correct: 'a'
+        id: "11",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val x = 5\n    val y = 10\n    println(x + y)\n}",
+        options: [
+            "510",
+            "15",
+            "5 + 10",
+            "Compiler Error"
+        ],
+        correct: "15"
     },
     {
-        question: 'Which of the following statements is true about Kotlin packages?',
-            a: 'A package can contain only classes',
-            b: 'A package can contain both classes and functions',
-            c: 'A package can only be defined at the top level of a Kotlin file',
-            d: 'A package can have a private visibility modifier',
-        correct: 'b'
+        id: "12",
+        question: "Which Kotlin keyword is used to define a class?",
+        options: [
+            "class",
+            "define",
+            "struct",
+            "create"
+        ],
+        correct: "class"
     },
     {
-        question: 'What is the purpose of the "lateinit" modifier in Kotlin?',
-            a: 'To specify that a variable cannot be reassigned',
-            b: 'To specify that a variable will be initialized later',
-            c: 'To specify that a variable cannot be accessed from outside the class',
-            d: 'To specify that a variable cannot be null',
-        correct: 'b'
+        id: "13",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val arr = arrayOf(1, 2, 3)\n    println(arr[1])\n}",
+        options: [
+            "1",
+            "2",
+            "3",
+            "Compiler Error"
+        ],
+        correct: "2"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val num: Int? = null\n    println(num ?: 0)\n}',
-            a: 'null',
-            b: '0',
-            c: 'Compilation error',
-            d: '1',
-        correct: 'b'
+        id: "14",
+        question: "What is the correct way to initialize an array in Kotlin?",
+        options: [
+            "val arr = arrayOf(1, 2, 3)",
+            "val arr[] = {1, 2, 3}",
+            "val arr: Array = arrayOf(1, 2, 3)",
+            "val arr: Array<Int> = arrayOf(1, 2, 3)"
+        ],
+        correct: "val arr = arrayOf(1, 2, 3)"
     },
     {
-        question: 'What is the purpose of the "init" block in Kotlin?',
-            a: 'To define the main function',
-            b: 'To initialize properties of a class',
-            c: 'To handle exceptions',
-            d: 'To define a companion object',
-        correct: 'b'
+        id: "15",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    println(\"Hello, \" + \"world!\")\n}",
+        options: [
+            "Hello, world!",
+            "Hello,",
+            "world!",
+            "Compiler Error"
+        ],
+        correct: "Hello, world!"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val list = listOf(1, 2, 3, 4, 5)\n    println(list[5])\n}',
-            a: '1',
-            b: '5',
-            c: 'IndexOutOfBoundsException',
-            d: 'Compilation error',
-        correct: 'c'
+        id: "16",
+        question: "Which Kotlin keyword is used to declare a function?",
+        options: [
+            "method",
+            "func",
+            "define",
+            "fun"
+        ],
+        correct: "fun"
     },
     {
-        question: 'What is the purpose of the "internal" visibility modifier in Kotlin?',
-            a: 'To restrict access to the class',
-            b: 'To make the class accessible only within the same package',
-            c: 'To make the class accessible from any other class',
-            d: 'To make the class accessible from any other class within the same module',
-        correct: 'd'
+        id: "17",
+        question: "What is the correct way to declare a constant variable in Kotlin?",
+        options: [
+            "val x = 5",
+            "const val x = 5",
+            "int x = const 5",
+            "int const x = 5"
+        ],
+        correct: "val x = 5"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val str = "Hello"\n    val result = str.removePrefix("Hel")\n    println(result)\n}',
-            a: 'Hello',
-            b: 'lo',
-            c: 'Hel',
-            d: 'Compilation error',
-        correct: 'b'
+        id: "18",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    println(5 > 3)\n}",
+        options: [
+            "True",
+            "False",
+            "1",
+            "0"
+        ],
+        correct: "True"
     },
     {
-        question: 'What is the purpose of the "sealed" modifier in Kotlin?',
-            a: 'To specify that a class cannot be subclassed',
-            b: 'To specify that a class cannot be instantiated',
-            c: 'To restrict access to the class',
-            d: 'To specify that a class can have only one instance',
-        correct: 'a'
+        id: "19",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val x = 10\n    val ref = x\n    println(ref)\n}",
+        options: [
+            "10",
+            "Reference Error",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "10"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val list = listOf(1, 2, 3, 4, 5)\n    println(list.getOrElse(10) { 0 })\n}',
-            a: '0',
-            b: '10',
-            c: '5',
-            d: 'Compilation error',
-        correct: 'a'
+        id: "20",
+        question: "Which Kotlin keyword is used to exit from a loop or switch case block?",
+        options: [
+            "exit",
+            "break",
+            "end",
+            "stop"
+        ],
+        correct: "break"
     },
     {
-        question: 'What is the purpose of the "const" keyword in Kotlin?',
-            a: 'To define a constant property',
-            b: 'To specify that a property cannot be reassigned',
-            c: 'To define a static method',
-            d: 'To specify that a class cannot be subclassed',
-        correct: 'a'
+        id: "21",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val x = 5\n    val y = 2\n    println(x % y)\n}",
+        options: [
+            "2",
+            "2.5",
+            "0.5",
+            "1"
+        ],
+        correct: "1"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val str = "Hello"\n    val result = str.capitalize()\n    println(result)\n}',
-            a: 'hello',
-            b: 'HELLO',
-            c: 'Hello',
-            d: 'Compilation error',
-        correct: 'c'
+        id: "22",
+        question: "What is the correct syntax to define a function outside the class in Kotlin?",
+        options: [
+            "fun myFunction() {}",
+            "fun MyClass.myFunction() {}",
+            "fun myFunction()::MyClass {}",
+            "fun myFunction() MyClass:: {}"
+        ],
+        correct: "fun myFunction() {}"
     },
     {
-        question: 'Which of the following statements is true about Kotlin lambdas?',
-            a: 'Kotlin lambdas always return a value',
-            b: 'Kotlin lambdas can capture variables from the surrounding scope',
-            c: 'Kotlin lambdas must have explicit return types',
-            d: 'Kotlin lambdas cannot be passed as arguments to functions',
-        correct: 'b'
+        id: "23",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val x = 10\n    val y = 20\n    val ptr = x\n    println(ptr)\n    ptr = 30\n    println(x)\n}",
+        options: [
+            "10 30",
+            "20 30",
+            "10 20",
+            "Compiler Error"
+        ],
+        correct: "10 30"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val str = "Hello"\n    val result = str.reversed()\n    println(result)\n}',
-            a: 'Hello',
-            b: 'olleH',
-            c: 'null',
-            d: 'Compilation error',
-        correct: 'b'
+        id: "24",
+        question: "What is the purpose of the 'val' keyword in Kotlin?",
+        options: [
+            "To specify that the variable can only be assigned once",
+            "To specify that the variable cannot be changed after initialization",
+            "To specify that a class cannot be subclassed",
+            "To specify that a method cannot be overridden"
+        ],
+        correct: "To specify that the variable cannot be changed after initialization"
     },
     {
-        question: 'What is the purpose of the "this" keyword in Kotlin?',
-            a: 'To refer to the current instance of a class',
-            b: 'To refer to the superclass of a class',
-            c: 'To create a new instance of a class',
-            d: 'To refer to the class itself',
-        correct: 'a'
+        id: "25",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    var x = 5\n    println(x)\n    x++\n    println(x)\n}",
+        options: [
+            "5 6",
+            "6 5",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "5 6"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val x = 5\n    val y = 2\n    println("$x + $y = ${x + y}")\n}',
-            a: '5 + 2 = 7',
-            b: '7',
-            c: 'Compilation error',
-            d: '"5 + 2 = 7"',
-        correct: 'a'
+        id: "26",
+        question: "What is the purpose of the 'sizeof' operator in Kotlin?",
+        options: [
+            "To determine the size of a data type",
+            "To determine the memory address of a variable",
+            "To determine the type of a variable",
+            "To determine the number of elements in an array"
+        ],
+        correct: "There is no 'sizeof' operator in Kotlin"
     },
     {
-        question: 'What is the purpose of the "tailrec" modifier in Kotlin?',
-            a: 'To specify that a function is tail-recursive',
-            b: 'To specify that a function can only be called from tail positions',
-            c: 'To specify that a function cannot be tail-recursive',
-            d: 'To specify that a function cannot have more than one parameter',
-        correct: 'a'
+        id: "27",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val str = \"Hello\"\n    println(str[5])\n}",
+        options: [
+            "H",
+            "e",
+            "l",
+            "StringIndexOutOfBoundsException"
+        ],
+        correct: "StringIndexOutOfBoundsException"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val str1 = "Hello"\n    val str2 = "Hello"\n    println(str1 === str2)\n}',
-            a: 'true',
-            b: 'false',
-            c: 'Compilation error',
-            d: 'null',
-        correct: 'a'
+        id: "28",
+        question: "What is the correct syntax to access the 'myVar' member variable of an object 'obj'?",
+        options: [
+            "obj.myVar",
+            "obj->myVar",
+            "obj::myVar",
+            "obj.myVar()"
+        ],
+        correct: "obj.myVar"
     },
     {
-        question: 'What is the purpose of the "lazy" keyword in Kotlin?',
-            a: 'To define a property that is initialized only when accessed for the first time',
-            b: 'To define a property that cannot be reassigned',
-            c: 'To specify that a property cannot be null',
-            d: 'To define a property that can only be accessed from within the class',
-        correct: 'a'
+        id: "29",
+        question: "What is the output of the following Kotlin code?\n\nfun main() {\n    val x = 10\n    val ptr = x\n    println(ptr)\n}",
+        options: [
+            "10",
+            "10 10",
+            "Memory Address of x",
+            "Compiler Error"
+        ],
+        correct: "10"
     },
     {
-        question: 'What is the output of the following code snippet?\n\nfun main() {\n    val list = mutableListOf(1, 2, 3, 4, 5)\n    list.add(6)\n    println(list.size)\n}',
-            a: '6',
-            b: '5',
-            c: 'Compilation error',
-            d: 'null',
-        correct: 'a'
-    }
+        id: "30",
+        question: "What is the purpose of the 'var' keyword in Kotlin?",
+        options: [
+            "To specify that a variable can only be accessed within a method",
+            "To specify that a method cannot be called recursively",
+            "To specify that a variable retains its value between method calls",
+            "To specify that a variable cannot be modified after initialization"
+        ],
+        correct: "To specify that a variable retains its value between method calls"
+    },
+    // Add more questions here...
 ];
 
 
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
-    }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
 
-document.querySelector("#submit").addEventListener(
+
+//Restart Quiz
+restart.addEventListener("click", () => {
+    initial();
+    displayContainer.classList.remove("hide");
+    scoreContainer.classList.add("hide");
+});
+
+//Next Button
+nextBtn.addEventListener(
     "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
+    (displayNext = () => {
+        //increment questionCount
+        questionCount += 1;
+        //if last question
+        if (questionCount == quizArray.length) {
+            //hide question container and display score
+            displayContainer.classList.add("hide");
+            scoreContainer.classList.remove("hide");
+            //user score
+            userScore.innerHTML =
+                "Your score is " + scoreCount + " out of " + questionCount;
         } else {
-            incorrect++;
+            //display questionCount
+            countOfQuestion.innerHTML =
+                questionCount + 1 + " of " + quizArray.length + " Question";
+            //display quiz
+            quizDisplay(questionCount);
+            count = 11;
+            clearInterval(countdown);
+            timerDisplay();
         }
-        index++;
-        loadQuestion()
+    })
+);
+
+//Timer
+const timerDisplay = () => {
+    countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+            clearInterval(countdown);
+            displayNext();
+        }
+    }, 1000);
+};
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+    let quizCards = document.querySelectorAll(".container-mid");
+    //Hide other cards
+    quizCards.forEach((card) => {
+        card.classList.add("hide");
+    });
+    //display current question card
+    quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+    //randomly sort questions
+    quizArray.sort(() => Math.random() - 0.5);
+    //generate quiz
+    for (let i of quizArray) {
+        //randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+        //quiz card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+        //question number
+        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        //question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        //options
+        div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+        quizContainer.appendChild(div);
     }
-)
+}
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+    let userSolution = userOption.innerText;
+    let question = document.getElementsByClassName("container-mid")[questionCount];
+    let options = question.querySelectorAll(".option-div");
+
+    // For marking the correct option
+    options.forEach((element) => {
+        if (element.innerText == quizArray[questionCount].correct) {
+            element.classList.add("correct");
         }
-    )
-    return ans;
+    });
+
+    // Mark the user's selected option as incorrect and change its color to red
+    userOption.classList.add("incorrect");
+
+    // Clear interval (stop timer)
+    clearInterval(countdown);
+
+    // Disable all options
+    options.forEach((element) => {
+        element.disabled = true;
+    });
+
+    // Increment the score if the user's answer was initially correct
+    if (userSolution == quizArray[questionCount].correct) {
+        scoreCount++;
+    }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//initial setup
+function initial() {
+    quizContainer.innerHTML = "";
+    questionCount = 0;
+    scoreCount = 0;
+    count = 11;
+    clearInterval(countdown);
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//when user click on start button
+startButton.addEventListener("click", () => {
+    startScreen.classList.add("hide");
+    displayContainer.classList.remove("hide");
+    initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+    startScreen.classList.remove("hide");
+    displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+    document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
 }
-loadQuestion(index);
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Close the current tab
+        window.close();
+    }
+});

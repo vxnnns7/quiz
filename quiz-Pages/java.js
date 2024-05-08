@@ -1,308 +1,505 @@
-const quizData = [{
-    question: "What is Java?",
-    a: "A database management system",
-    b: "A programming language",
-    c: "An operating system",
-    d: "A web browser",
-    correct: "b"
-},
-{
-    question: "Which keyword is used to define a class in Java?",
-    a: "class",
-    b: "struct",
-    c: "interface",
-    d: "void",
-    correct: "a"
-},
-{
-    question: "Which data type is used to represent whole numbers in Java?",
-    a: "float",
-    b: "double",
-    c: "int",
-    d: "char",
-    correct: "c"
-},
-{
-    question: "What is the correct way to declare a constant variable in Java?",
-    a: "const int x = 10;",
-    b: "final int x = 10;",
-    c: "var x = 10;",
-    d: "let x = 10;",
-    correct: "b"
-},
-{
-    question: "Which operator is used to compare two values in Java?",
-    a: "==",
-    b: "!=",
-    c: "<>",
-    d: "><",
-    correct: "a"
-},
-{
-    question: "What is the output of the following code snippet?\n\nSystem.out.println(5 + 3 + \"Java\");",
-    a: "8",
-    b: "5 + 3 + \"Java\"",
-    c: "8Java",
-    d: "53Java",
-    correct: "c"
-},
-{
-    question: "Which loop is guaranteed to execute at least one time in Java?",
-    a: "while loop",
-    b: "do-while loop",
-    c: "for loop",
-    d: "foreach loop",
-    correct: "b"
-},
-{
-    question: "What is the purpose of the break statement in Java?",
-    a: "To terminate the program execution",
-    b: "To skip the current iteration of a loop",
-    c: "To return a value from a function",
-    d: "To define custom functions",
-    correct: "b"
-},
-{
-    question: "Which keyword is used to define a method in Java?",
-    a: "method",
-    b: "define",
-    c: "function",
-    d: "void",
-    correct: "d"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint x = 5;\nint y = x++;\nSystem.out.println(y);",
-    a: "5",
-    b: "6",
-    c: "4",
-    d: "Undefined",
-    correct: "a"
-},
-{
-    question: "Which of the following is NOT a valid access modifier in Java?",
-    a: "public",
-    b: "protected",
-    c: "private",
-    d: "global",
-    correct: "d"
-},
-{
-    question: "What is the correct way to create an object of a class in Java?",
-    a: "new MyClass;",
-    b: "MyClass obj = new();",
-    c: "MyClass obj = new MyClass();",
-    d: "MyClass obj = MyClass();",
-    correct: "c"
-},
-{
-    question: "What does the keyword 'static' mean in Java?",
-    a: "The method can be called without creating an instance of the class",
-    b: "The method can only be accessed by other methods in the same class",
-    c: "The method cannot be overridden",
-    d: "The method is not accessible outside the class",
-    correct: "a"
-},
-{
-    question: "What is the purpose of the 'this' keyword in Java?",
-    a: "To refer to the current object",
-    b: "To create a new object",
-    c: "To call a method in another class",
-    d: "To declare a constant",
-    correct: "a"
-},
-{
-    question: "Which keyword is used to prevent a method from being overridden in Java?",
-    a: "override",
-    b: "final",
-    c: "static",
-    d: "private",
-    correct: "b"
-},
-{
-    question: "What is the purpose of the 'super' keyword in Java?",
-    a: "To call the superclass constructor",
-    b: "To refer to the current object",
-    c: "To declare a constant",
-    d: "To prevent method overriding",
-    correct: "a"
-},
-{
-    question: "Which statement is used to exit a loop in Java?",
-    a: "break",
-    b: "exit",
-    c: "return",
-    d: "continue",
-    correct: "a"
-},
-{
-    question: "Which data structure is used to store key-value pairs in Java?",
-    a: "Array",
-    b: "List",
-    c: "Map",
-    d: "Set",
-    correct: "c"
-},
-{
-    question: "What is the purpose of the 'implements' keyword in Java?",
-    a: "To implement an interface",
-    b: "To inherit from a superclass",
-    c: "To create a new class",
-    d: "To declare a constant",
-    correct: "a"
-},
-{
-    question: "What is the correct way to declare a multi-dimensional array in Java?",
-    a: "int[] array;",
-    b: "int[][] array;",
-    c: "int array[];",
-    d: "array[][] int;",
-    correct: "b"
-},
-{
-    question: "What is the output of the following code snippet?\n\nString str1 = \"hello\";\nString str2 = \"hello\";\nSystem.out.println(str1 == str2);",
-    a: "true",
-    b: "false",
-    c: "Compilation error",
-    d: "Runtime error",
-    correct: "a"
-},
-{
-    question: "Which of the following is NOT a valid Java identifier?",
-    a: "my_variable",
-    b: "_myVariable",
-    c: "3myVariable",
-    d: "myVariable_",
-    correct: "c"
-},
-{
-    question: "What is the output of the following code snippet?\n\nString str = \"Java\";\nSystem.out.println(str.substring(1, 3));",
-    a: "Jav",
-    b: "ava",
-    c: "va",
-    d: "av",
-    correct: "c"
-},
-{
-    question: "Which Java keyword is used to create a new instance of a class?",
-    a: "instance",
-    b: "create",
-    c: "new",
-    d: "allocate",
-    correct: "c"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint x = 10;\nSystem.out.println(x > 5 ? \"Yes\" : \"No\");",
-    a: "Yes",
-    b: "No",
-    c: "True",
-    d: "False",
-    correct: "a"
-},
-{
-    question: "What is the purpose of the 'extends' keyword in Java?",
-    a: "To extend the functionality of a superclass",
-   
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
 
- b: "To implement an interface",
-    c: "To create a new class",
-    d: "To declare a constant",
-    correct: "a"
-},
-{
-    question: "Which Java keyword is used to prevent a variable from being modified?",
-    a: "final",
-    b: "const",
-    c: "static",
-    d: "immutable",
-    correct: "a"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint x = 5;\nSystem.out.println(x++);",
-    a: "5",
-    b: "6",
-    c: "4",
-    d: "Undefined",
-    correct: "a"
-},
-{
-    question: "Which of the following is NOT a valid Java data type?",
-    a: "boolean",
-    b: "string",
-    c: "byte",
-    d: "double",
-    correct: "b"
-},
-{
-    question: "What is the output of the following code snippet?\n\nint[] arr = {1, 2, 3, 4, 5};\nfor (int i = 0; i < arr.length; i++) {\n    System.out.print(arr[i] + \" \");\n}",
-    a: "1 2 3 4 5",
-    b: "5 4 3 2 1",
-    c: "0 1 2 3 4",
-    d: "Error",
-    correct: "a"
-}
+//Questions and Options array
+
+const quizArray = [
+    {
+        id: "1",
+        question: "What does the following Java code print?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 5;\n        System.out.println(x++);\n    }\n}",
+        options: [
+            "5",
+            "6",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "5"
+    },
+    {
+        id: "2",
+        question: "Which of the following is not a valid Java keyword?",
+        options: [
+            "class",
+            "interface",
+            "package",
+            "function"
+        ],
+        correct: "function"
+    },
+    {
+        id: "3",
+        question: "What is the result of the expression '5 + 3 * 2' in Java?",
+        options: [
+            "16",
+            "11",
+            "13",
+            "18"
+        ],
+        correct: "11"
+    },
+    {
+        id: "4",
+        question: "Which of the following is the correct way to declare an array in Java?",
+        options: [
+            "int[] arr = new int[5];",
+            "int arr[5];",
+            "arr[5] = new int[];",
+            "new int arr[5];"
+        ],
+        correct: "int[] arr = new int[5];"
+    },
+    {
+        id: "5",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(10 / 3);\n    }\n}",
+        options: [
+            "3",
+            "3.33",
+            "3.0",
+            "Compiler Error"
+        ],
+        correct: "3"
+    },
+    {
+        id: "6",
+        question: "Which of the following is a valid way to declare a String object in Java?",
+        options: [
+            "String str = \"Hello\";",
+            "str = new String(\"Hello\");",
+            "str = String(\"Hello\");",
+            "Both A and B"
+        ],
+        correct: "Both A and B"
+    },
+    {
+        id: "7",
+        question: "Which operator is used to allocate memory for an object in Java?",
+        options: [
+            "alloc",
+            "new",
+            "malloc",
+            "allocate"
+        ],
+        correct: "new"
+    },
+    {
+        id: "8",
+        question: "What does the 'println' method do in Java?",
+        options: [
+            "Prints a new line to the console",
+            "Prints a formatted line to the console",
+            "Prints a line without a newline character",
+            "Prints a line to a file"
+        ],
+        correct: "Prints a new line to the console"
+    },
+    {
+        id: "9",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 10;\n        System.out.println(x / 3);\n    }\n}",
+        options: [
+            "3",
+            "3.33",
+            "3.0",
+            "Compiler Error"
+        ],
+        correct: "3"
+    },
+    {
+        id: "10",
+        question: "Which of the following is not a valid Java variable name?",
+        options: [
+            "myVariable",
+            "_myVariable",
+            "123Variable",
+            "variable123"
+        ],
+        correct: "123Variable"
+    },
+    {
+        id: "11",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 5;\n        int y = 10;\n        System.out.println(x + y);\n    }\n}",
+        options: [
+            "510",
+            "15",
+            "5 + 10",
+            "Compiler Error"
+        ],
+        correct: "15"
+    },
+    {
+        id: "12",
+        question: "Which Java keyword is used to define a class?",
+        options: [
+            "class",
+            "define",
+            "struct",
+            "create"
+        ],
+        correct: "class"
+    },
+    {
+        id: "13",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3};\n        System.out.println(arr[1]);\n    }\n}",
+        options: [
+            "1",
+            "2",
+            "3",
+            "Compiler Error"
+        ],
+        correct: "2"
+    },
+    {
+        id: "14",
+        question: "What is the correct way to initialize an array in Java?",
+        options: [
+            "int[] arr = {1, 2, 3};",
+            "arr[] = {1, 2, 3};",
+            "int[] arr; arr = {1, 2, 3};",
+            "int[] arr = new int[3] {1, 2, 3};"
+        ],
+        correct: "int[] arr = {1, 2, 3};"
+    },
+    {
+        id: "15",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, \" + \"world!\");\n    }\n}",
+        options: [
+            "Hello, world!",
+            "Hello,",
+            "world!",
+            "Compiler Error"
+        ],
+        correct: "Hello, world!"
+    },
+    {
+        id: "16",
+        question: "Which Java keyword is used to declare a method?",
+        options: [
+            "method",
+            "func",
+            "define",
+            "function"
+        ],
+        correct: "method"
+    },
+    {
+        id: "17",
+        question: "What is the correct way to declare a constant variable in Java?",
+        options: [
+            "final int x = 5;",
+            "constant int x = 5;",
+            "int final x = 5;",
+            "int x = const 5;"
+        ],
+        correct: "final int x = 5;"
+    },
+    {
+        id: "18",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(5 > 3);\n    }\n}",
+        options: [
+            "True",
+            "False",
+            "1",
+            "0"
+        ],
+        correct: "True"
+    },
+    {
+        id: "19",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 10;\n        int y = 20;\n        int ref = x;\n        System.out.println(ref);\n    }\n}",
+        options: [
+            "10",
+            "Reference Error",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "10"
+    },
+    {
+        id: "20",
+        question: "Which Java keyword is used to exit from a loop or switch case block?",
+        options: [
+            "exit",
+            "break",
+            "end",
+            "stop"
+        ],
+        correct: "break"
+    },
+    {
+        id: "21",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 5;\n        int y = 2;\n        System.out.println(x % y);\n    }\n}",
+        options: [
+            "2",
+            "2.5",
+            "0.5",
+            "1"
+        ],
+        correct: "1"
+    },
+    {
+        id: "22",
+        question: "What is the correct syntax to define a method outside the class in Java?",
+        options: [
+            "void myMethod() {}",
+            "void MyClass.myMethod() {}",
+            "void myMethod()::MyClass {}",
+            "void myMethod() MyClass:: {}"
+        ],
+        correct: "void myMethod() {}"
+    },
+    {
+        id: "23",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 10;\n        int y = 20;\n        int ptr = x;\n        System.out.println(ptr);\n        ptr = 30;\n        System.out.println(x);\n    }\n}",
+        options: [
+            "10 30",
+            "20 30",
+            "10 20",
+            "Compiler Error"
+        ],
+        correct: "10 30"
+    },
+    {
+        id: "24",
+        question: "What is the purpose of the 'final' keyword in Java?",
+        options: [
+            "To specify that the variable can only be assigned once",
+            "To specify that the variable cannot be changed after initialization",
+            "To specify that a class cannot be subclassed",
+            "To specify that a method cannot be overridden"
+        ],
+        correct: "To specify that the variable cannot be changed after initialization"
+    },
+    {
+        id: "25",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 5;\n        System.out.println(x);\n        x++;\n        System.out.println(x);\n    }\n}",
+        options: [
+            "5 6",
+            "6 5",
+            "Compiler Error",
+            "Undefined Behavior"
+        ],
+        correct: "5 6"
+    },
+    {
+        id: "26",
+        question: "What is the purpose of the 'sizeof' operator in Java?",
+        options: [
+            "To determine the size of a data type",
+            "To determine the memory address of a variable",
+            "To determine the type of a variable",
+            "To determine the number of elements in an array"
+        ],
+        correct: "There is no 'sizeof' operator in Java"
+    },
+    {
+        id: "27",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        String str = \"Hello\";\n        System.out.println(str.charAt(5));\n    }\n}",
+        options: [
+            "H",
+            "e",
+            "l",
+            "Compiler Error"
+        ],
+        correct: "StringIndexOutOfBoundsException"
+    },
+    {
+        id: "28",
+        question: "What is the correct syntax to access the 'myVar' member variable of an object 'obj'?",
+        options: [
+            "obj.myVar",
+            "obj->myVar",
+            "obj::myVar",
+            "obj.myVar()"
+        ],
+        correct: "obj.myVar"
+    },
+    {
+        id: "29",
+        question: "What is the output of the following Java code?\n\npublic class Main {\n    public static void main(String[] args) {\n        int x = 10;\n        int ptr = x;\n        System.out.println(ptr);\n    }\n}",
+        options: [
+            "10",
+            "10 10",
+            "Memory Address of x",
+            "Compiler Error"
+        ],
+        correct: "10"
+    },
+    {
+        id: "30",
+        question: "What is the purpose of the 'static' keyword in Java?",
+        options: [
+            "To specify that a variable can only be accessed within a method",
+            "To specify that a method cannot be called recursively",
+            "To specify that a variable retains its value between method calls",
+            "To specify that a variable cannot be modified after initialization"
+        ],
+        correct: "To specify that a variable retains its value between method calls"
+    },
 ];
 
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
-    }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
 
-document.querySelector("#submit").addEventListener(
+
+//Restart Quiz
+restart.addEventListener("click", () => {
+    initial();
+    displayContainer.classList.remove("hide");
+    scoreContainer.classList.add("hide");
+});
+
+//Next Button
+nextBtn.addEventListener(
     "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
+    (displayNext = () => {
+        //increment questionCount
+        questionCount += 1;
+        //if last question
+        if (questionCount == quizArray.length) {
+            //hide question container and display score
+            displayContainer.classList.add("hide");
+            scoreContainer.classList.remove("hide");
+            //user score
+            userScore.innerHTML =
+                "Your score is " + scoreCount + " out of " + questionCount;
         } else {
-            incorrect++;
+            //display questionCount
+            countOfQuestion.innerHTML =
+                questionCount + 1 + " of " + quizArray.length + " Question";
+            //display quiz
+            quizDisplay(questionCount);
+            count = 11;
+            clearInterval(countdown);
+            timerDisplay();
         }
-        index++;
-        loadQuestion()
+    })
+);
+
+//Timer
+const timerDisplay = () => {
+    countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+            clearInterval(countdown);
+            displayNext();
+        }
+    }, 1000);
+};
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+    let quizCards = document.querySelectorAll(".container-mid");
+    //Hide other cards
+    quizCards.forEach((card) => {
+        card.classList.add("hide");
+    });
+    //display current question card
+    quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+    //randomly sort questions
+    quizArray.sort(() => Math.random() - 0.5);
+    //generate quiz
+    for (let i of quizArray) {
+        //randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+        //quiz card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+        //question number
+        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        //question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        //options
+        div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+        quizContainer.appendChild(div);
     }
-)
+}
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+    let userSolution = userOption.innerText;
+    let question = document.getElementsByClassName("container-mid")[questionCount];
+    let options = question.querySelectorAll(".option-div");
+
+    // For marking the correct option
+    options.forEach((element) => {
+        if (element.innerText == quizArray[questionCount].correct) {
+            element.classList.add("correct");
         }
-    )
-    return ans;
+    });
+
+    // Mark the user's selected option as incorrect and change its color to red
+    userOption.classList.add("incorrect");
+
+    // Clear interval (stop timer)
+    clearInterval(countdown);
+
+    // Disable all options
+    options.forEach((element) => {
+        element.disabled = true;
+    });
+
+    // Increment the score if the user's answer was initially correct
+    if (userSolution == quizArray[questionCount].correct) {
+        scoreCount++;
+    }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//initial setup
+function initial() {
+    quizContainer.innerHTML = "";
+    questionCount = 0;
+    scoreCount = 0;
+    count = 11;
+    clearInterval(countdown);
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//when user click on start button
+startButton.addEventListener("click", () => {
+    startScreen.classList.add("hide");
+    displayContainer.classList.remove("hide");
+    initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+    startScreen.classList.remove("hide");
+    displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+    document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
 }
-loadQuestion(index);
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Close the current tab
+        window.close();
+    }
+});

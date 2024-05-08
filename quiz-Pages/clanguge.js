@@ -1,310 +1,505 @@
-const quizData = [{
-    question: 'What is the syntax for declaring a variable in C?',
-    a: 'variableName = value;',
-    b: 'var variableName = value;',
-    c: 'int variableName = value;',
-    d: 'variableName;',
-    correct: 'c'
-},
-{
-    question: 'Which of the following is NOT a valid data type in C?',
-    a: 'float',
-    b: 'string',
-    c: 'char',
-    d: 'double',
-    correct: 'b'
+//References
+let timeLeft = document.querySelector(".time-left");
+let quizContainer = document.getElementById("container");
+let nextBtn = document.getElementById("next-button");
+let countOfQuestion = document.querySelector(".number-of-question");
+let displayContainer = document.getElementById("display-container");
+let scoreContainer = document.querySelector(".score-container");
+let restart = document.getElementById("restart");
+let userScore = document.getElementById("user-score");
+let startScreen = document.querySelector(".start-screen");
+let startButton = document.getElementById("start-button");
+let questionCount;
+let scoreCount = 0;
+let count = 11;
+let countdown;
 
-},
-{
-    question: 'What is the purpose of the printf() function in C?',
-    a: 'To read input from the user',
-    b: 'To perform mathematical calculations',
-    c: 'To display output to the console',
-    d: 'To define custom functions',
-    correct: 'c'
+//Questions and Options array
 
-},
-{
-    question: 'Which symbol is used for single-line comments in C?',
-    a: '//',
-    b: '--',
-    c: '/* */',
-    d: '##',
-    correct: "a",
-},
-{
-    question: 'What is the purpose of the scanf() function in C?',
-    a: 'To print output to the console',
-    b: 'To read input from the user',
-    c: 'To perform string operations',
-    d: 'To define custom functions',
-    correct: 'b'
-},
-{
-    question: 'Which of the following is the correct syntax to declare a pointer variable in C?',
-    a: 'int ptr;',
-    b: 'ptr int;',
-    c: 'pointer int;',
-    d: 'int *ptr;',
-    correct: 'd'
-},
-{
-    question: 'What is the purpose of the sizeof() operator in C?',
-    a: 'To determine the size of a variable or data type',
-    b: 'To perform arithmetic operations',
-    c: 'To read input from the user',
-    d: 'To define custom functions',
-    correct: 'a'
-},
-{
-    question: 'Which header file is used for input and output operations in C?',
-    a: '<stdio.h>',
-    b: '<stdlib.h>',
-    c: '<math.h>',
-    d: '<string.h>',
-    correct: 'a'
-},
-{
-    question: 'What is the output of the following code snippet?\n\nint x = 5, y = 3;\nprintf("%d", x / y);',
-    a: '1',
-    b: '1.6667',
-    c: '1.5',
-    d: '1.0',
-    correct: 'd'
-},
-{
-    question: 'What is the output of the following code snippet?\n\nchar str[] = "Hello";\nprintf("%d", sizeof(str));',
-    a: '5',
-    b: '6',
-    c: '11',
-    d: '10',
-    correct: 'c'
-},
-{
-    question: 'Which of the following statements is true about arrays in C?',
-    a: 'Arrays can hold only elements of the same data type',
-    b: 'Arrays can dynamically resize at runtime',
-    c: 'Arrays can only store a fixed number of elements',
-    d: 'Arrays can be initialized without specifying the size',
-    correct: 'a'
-},
-{
-    question: 'What is the purpose of the break statement in C?',
-    a: 'To terminate the program execution',
-    b: 'To skip the current iteration of a loop',
-    c: 'To return a value from a function',
-    d: 'To define custom functions',
-    correct: 'b'
-},
-{
-    question: 'Which of the following is the correct syntax for the switch statement in C?',
-    a: 'switch (expression) { case constant: statements }',
-    b: 'switch (expression) { default: statements }',
-    c: 'switch (expression) { case constant: statements default: statements }',
-    d: 'switch (expression) { case constant: statements; default: statements; }',
-    correct: 'a'
-},
-{
-      
-    question: 'What is the purpose of the continue statement in C?',
-        a: 'To terminate the program execution',
-        b: 'To skip the current iteration of a loop and continue with the next iteration',
-        c: 'To return a value from a function',
-        d: 'To define custom functions',
-    correct: 'b'
-},
-{
-    question: 'What is the output of the following code snippet?\n\nint arr[5];\nprintf("%d", arr[0]);',
-        a: '0',
-        b: 'Undefined behavior',
-        c: 'Garbage value',
-        d: '5',
-    correct: 'c'
-}, 
-{
-    question: 'What is the purpose of the do-while loop in C?',
-        a: 'To execute a block of code repeatedly as long as a condition is true',
-        b: 'To execute a block of code repeatedly until a condition becomes true',
-        c: 'To execute a block of code once before checking the condition',
-        d: 'To define custom functions',
-    correct: 'a'
-},
-{
-   
-    question: 'What is the purpose of the static keyword in C?',
-        a: 'To define custom functions',
-        b: 'To declare variables that are visible only within the function they are defined',
-        c: 'To allocate memory dynamically',
-        d: 'To perform arithmetic operations',
-    correct: 'b'
-},
-{
-    question: 'Which of the following is true about functions in C?',
-        a: 'Functions can only return a single value',
-        b: 'Functions cannot call other functions',
-        c: 'Functions can have multiple return statements',
-        d: 'Functions cannot have parameters',
-    correct: 'c'
-},
-{
-    question: 'What is the purpose of recursion in C?',
-        a: 'To define custom functions',
-        b: 'To execute a block of code repeatedly until a condition becomes true',
-        c: 'To call a function from within the same function',
-        d: 'To allocate memory dynamically',
-    correct: 'c'
-},
-{
-    question: 'What is the purpose of the void data type in C?',
-        a: 'To specify that a function does not return any value',
-        b: 'To declare variables with an unknown data type',
-        c: 'To define custom functions',
-        d: 'To perform arithmetic operations',
-    correct: 'a'
-},
-{
-    question: 'What is the output of the following code snippet?\n\nint x = 10;\nint *ptr = &x;\nprintf("%d", *ptr);',
-        a: '10',
-        b: '0',
-        c: 'Error',
-        d: 'Undefined behavior',
-    correct: 'a'
-},
-{
-    question: 'What is the purpose of the malloc() function in C?',
-        a: 'To perform arithmetic operations',
-        b: 'To allocate memory dynamically',
-        c: 'To read input from the user',
-        d: 'To define custom functions',
-    correct: 'b'
-},
-{
-    question: 'What is the purpose of the free() function in C?',
-        a: 'To perform arithmetic operations',
-        b: 'To deallocate memory previously allocated by malloc()',
-        c: 'To read input from the user',
-        d: 'To define custom functions',
-    correct: 'b'
-},
-{
-    question: 'Which of the following is NOT a standard library function in C?',
-        a: 'scanf()',
-        b: 'printf()',
-        c: 'strlen()',
-        d: 'input()',
-    correct: 'd'
-},
-{
-    question: 'What is the output of the following code snippet?\n\nint x = 5;\nint *ptr = &x;\nprintf("%p", ptr);',
-        a: '5',
-        b: '0',
-        c: 'Address of x',
-        d: 'Undefined behavior',
-    correct: 'c'
-},
-{
-    question: 'What is the purpose of the typedef keyword in C?',
-        a: 'To perform arithmetic operations',
-        b: 'To define custom data types',
-        c: 'To read input from the user',
-        d: 'To declare variables with an unknown data type',
-    correct: 'b'
-},
-{
-    question: 'What is the output of the following code snippet?\n\nint x = 5;\nint *ptr = &x;\nprintf("%d", ptr);',
-        a: '5',
-        b: '0',
-        c: 'Address of x',
-        d: 'Undefined behavior',
-    correct: 'c'
-},
-{
-    question: 'What is the purpose of the #include directive in C?',
-        a: 'To perform arithmetic operations',
-        b: 'To include the contents of a header file',
-        c: 'To read input from the user',
-        d: 'To define custom functions',
-    correct: 'b'
-},
-{
-    question: 'Which of the following is true about structures in C?',
-        a: 'Structures cannot contain functions',
-        b: 'Structures cannot contain other structures',
-        c: 'Structures cannot have members of different data types',
-        d: 'Structures can have members of different data types',
-    correct: 'd'
-},
-{
-    question: 'What is the purpose of the const keyword in C?',
-        a: 'To define custom functions',
-        b: 'To declare constants',
-        c: 'To perform arithmetic operations',
-        d: 'To allocate memory dynamically',
-    correct: 'b'
-},
+const quizArray = [
+    {
+        id: "1",
+        question: "What does the 'printf' function in C do?",
+        options: [
+            "Reads input from the user",
+            "Prints output to the console",
+            "Opens a file for writing",
+            "Performs mathematical calculations"
+        ],
+        correct: "Prints output to the console"
+    },
+    {
+        id: "2",
+        question: "Which symbol is used to denote a single-line comment in C?",
+        options: [
+            "//",
+            "#",
+            "/*",
+            "'"
+        ],
+        correct: "//"
+    },
+    {
+        id: "3",
+        question: "What is the syntax for declaring a variable in C?",
+        options: [
+            "var myVariable;",
+            "int myVariable;",
+            "variable myVariable;",
+            "myVariable = int;"
+        ],
+        correct: "int myVariable;"
+    },
+    {
+        id: "4",
+        question: "Which statement is used to terminate the execution of a loop in C?",
+        options: [
+            "halt;",
+            "end;",
+            "terminate;",
+            "break;"
+        ],
+        correct: "break;"
+    },
+    {
+        id: "5",
+        question: "What is the purpose of the 'scanf' function in C?",
+        options: [
+            "Prints formatted output",
+            "Reads input from the user",
+            "Performs mathematical calculations",
+            "Terminates the program"
+        ],
+        correct: "Reads input from the user"
+    },
+    {
+        id: "6",
+        question: "Which data type is used to store single characters in C?",
+        options: [
+            "char",
+            "int",
+            "float",
+            "string"
+        ],
+        correct: "char"
+    },
+    {
+        id: "7",
+        question: "What is the output of the following code snippet?\n\n#include <stdio.h>\n\nint main() {\n    int x = 5;\n    printf(\"%d\", x++);\n    return 0;\n}",
+        options: [
+            "5",
+            "6",
+            "Error",
+            "Undefined"
+        ],
+        correct: "5"
+    },
+    {
+        id: "8",
+        question: "What is the syntax for defining a constant in C?",
+        options: [
+            "#define MY_CONSTANT 10",
+            "const MY_CONSTANT = 10;",
+            "constant MY_CONSTANT = 10;",
+            "const int MY_CONSTANT = 10;"
+        ],
+        correct: "#define MY_CONSTANT 10"
+    },
+    {
+        id: "9",
+        question: "Which operator is used to access the value stored in a pointer variable in C?",
+        options: [
+            "&",
+            "*",
+            "->",
+            "."
+        ],
+        correct: "*"
+    },
+    {
+        id: "10",
+        question: "What is the purpose of the 'return' statement in a function in C?",
+        options: [
+            "Prints output to the console",
+            "Reads input from the user",
+            "Terminates the program",
+            "Returns a value from the function"
+        ],
+        correct: "Returns a value from the function"
+    },
+    {
+        id: "11",
+        question: "What is the output of the following code snippet?\n\n#include <stdio.h>\n\nint main() {\n    int x = 10;\n    if (x > 5) {\n        printf(\"Hello\");\n    }\n    return 0;\n}",
+        options: [
+            "Hello",
+            "Nothing",
+            "Error",
+            "Undefined"
+        ],
+        correct: "Hello"
+    },
+    {
+        id: "12",
+        question: "Which library is used for input and output functions in C?",
+        options: [
+            "<conio.h>",
+            "<math.h>",
+            "<stdio.h>",
+            "<stdlib.h>"
+        ],
+        correct: "<stdio.h>"
+    },
+    {
+        id: "13",
+        question: "Which statement is used to declare a function in C?",
+        options: [
+            "define",
+            "function",
+            "method",
+            "void"
+        ],
+        correct: "void"
+    },
+    {
+        id: "14",
+        question: "What is the purpose of the 'sizeof' operator in C?",
+        options: [
+            "Returns the size of a variable or data type",
+            "Returns the address of a variable",
+            "Performs mathematical calculations",
+            "Prints formatted output"
+        ],
+        correct: "Returns the size of a variable or data type"
+    },
+    {
+        id: "15",
+        question: "What is the output of the following code snippet?\n\n#include <stdio.h>\n\nint main() {\n    printf(\"%d\", sizeof(int));\n    return 0;\n}",
+        options: [
+            "4",
+            "2",
+            "8",
+            "Depends on the system architecture"
+        ],
+        correct: "Depends on the system architecture"
+    },
+    {
+        id: "16",
+        question: "Which operator is used to find the remainder of a division operation in C?",
+        options: [
+            "/",
+            "%",
+            "**",
+            "//"
+        ],
+        correct: "%"
+    },
+    {
+        id: "17",
+        question: "What is the output of the following code snippet?\n\n#include <stdio.h>\n\nint main() {\n    int x = 5;\n    printf(\"%d\", x << 1);\n    return 0;\n}",
+        options: [
+            "5",
+            "10",
+            "15",
+            "Error"
+        ],
+        correct: "10"
+    },
+    {
+        id: "18",
+        question: "Which statement is used to define a multi-dimensional array in C?",
+        options: [
+            "array",
+            "list",
+            "matrix",
+            "None of the above"
+        ],
+        correct: "None of the above"
+    },
+    {
+        id: "19",
+        question: "Which loop is used to execute a block of code multiple times in C?",
+        options: [
+            "for",
+            "while",
+            "do-while",
+            "All of the above"
+        ],
+        correct: "All of the above"
+    },
+    {
+        id: "20",
+        question: "What is the purpose of the 'break' statement in a switch-case construct in C?",
+        options: [
+            "Terminates the program",
+            "Exits the loop",
+            "Jumps to a specific case label",
+            "Continues to the next iteration of the loop"
+        ],
+        correct: "Exits the loop"
+    },
+    {
+        id: "21",
+        question: "Which statement is used to include the contents of another file in a C program?",
+        options: [
+            "#include",
+            "#import",
+            "#require",
+            "#attach"
+        ],
+        correct: "#include"
+    },
+    {
+        id: "22",
+        question: "What is the purpose of the 'continue' statement in a loop in C?",
+        options: [
+            "Exits the loop",
+            "Jumps to a specific case label",
+            "Continues to the next iteration of the loop",
+            "None of the above"
+        ],
+        correct: "Continues to the next iteration of the loop"
+    },
+    {
+        id: "23",
+        question: "Which statement is used to dynamically allocate memory in C?",
+        options: [
+            "malloc()",
+            "calloc()",
+            "realloc()",
+            "All of the above"
+        ],
+        correct: "All of the above"
+    },
+    {
+        id: "24",
+        question: "What is the output of the following code snippet?\n\n#include <stdio.h>\n\nint main() {\n    int x = 5;\n    printf(\"%d\", x / 2);\n    return 0;\n}",
+        options: [
+            "2.5",
+            "2",
+            "2.0",
+            "Error"
+        ],
+        correct: "2"
+    },
+    {
+        id: "25",
+        question: "What is the purpose of the 'do-while' loop in C?",
+        options: [
+            "To execute a block of code multiple times",
+            "To execute a block of code at least once",
+            "To iterate over the elements of an array",
+            "To terminate the program"
+        ],
+        correct: "To execute a block of code at least once"
+    },
+    {
+        id: "26",
+        question: "Which statement is used to define a structure in C?",
+        options: [
+            "struct",
+            "class",
+            "type",
+            "None of the above"
+        ],
+        correct: "struct"
+    },
+    {
+        id: "27",
+        question: "What is the output of the following code snippet?\n\n#include <stdio.h>\n\nint main() {\n    int x = 5;\n    printf(\"%d\", x > 2 ? x : 2);\n    return 0;\n}",
+        options: [
+            "5",
+            "2",
+            "Error",
+            "Undefined"
+        ],
+        correct: "5"
+    },
+    {
+        id: "28",
+        question: "What is the purpose of the 'void' keyword in a function declaration in C?",
+        options: [
+            "To indicate that the function returns no value",
+            "To indicate that the function accepts no parameters",
+            "To indicate that the function is private",
+            "To indicate that the function is static"
+        ],
+        correct: "To indicate that the function returns no value"
+    },
+    {
+        id: "29",
+        question: "Which statement is used to define a pointer variable in C?",
+        options: [
+            "var",
+            "ptr",
+            "pointer",
+            "None of the above"
+        ],
+        correct: "None of the above"
+    },
+    {
+        id: "30",
+        question: "What is the output of the following code snippet?\n\n#include <stdio.h>\n\nint main() {\n    int x = 10;\n    x += 5;\n    printf(\"%d\", x);\n    return 0;\n}",
+        options: [
+            "5",
+            "10",
+            "15",
+            "Error"
+        ],
+        correct: "15"
+    }
 ];
 
 
-let index = 0;
-let correct = 0,
-    incorrect = 0,
-    total = quizData.length;
-let questionBox = document.getElementById("questionBox");
-let allInputs = document.querySelectorAll("input[type='radio']")
-const loadQuestion = () => {
-    if (total === index) {
-        return quizEnd()
-    }
-    reset()
-    const data = quizData[index]
-    questionBox.innerHTML = `${index + 1}) ${data.question}`
-    allInputs[0].nextElementSibling.innerText = data.a
-    allInputs[1].nextElementSibling.innerText = data.b
-    allInputs[2].nextElementSibling.innerText = data.c
-    allInputs[3].nextElementSibling.innerText = data.d
-}
 
-document.querySelector("#submit").addEventListener(
+
+//Restart Quiz
+restart.addEventListener("click", () => {
+    initial();
+    displayContainer.classList.remove("hide");
+    scoreContainer.classList.add("hide");
+});
+
+//Next Button
+nextBtn.addEventListener(
     "click",
-    function () {
-        const data = quizData[index]
-        const ans = getAnswer()
-        if (ans === data.correct) {
-            correct++;
+    (displayNext = () => {
+        //increment questionCount
+        questionCount += 1;
+        //if last question
+        if (questionCount == quizArray.length) {
+            //hide question container and display score
+            displayContainer.classList.add("hide");
+            scoreContainer.classList.remove("hide");
+            //user score
+            userScore.innerHTML =
+                "Your score is " + scoreCount + " out of " + questionCount;
         } else {
-            incorrect++;
+            //display questionCount
+            countOfQuestion.innerHTML =
+                questionCount + 1 + " of " + quizArray.length + " Question";
+            //display quiz
+            quizDisplay(questionCount);
+            count = 11;
+            clearInterval(countdown);
+            timerDisplay();
         }
-        index++;
-        loadQuestion()
+    })
+);
+
+//Timer
+const timerDisplay = () => {
+    countdown = setInterval(() => {
+        count--;
+        timeLeft.innerHTML = `${count}s`;
+        if (count == 0) {
+            clearInterval(countdown);
+            displayNext();
+        }
+    }, 1000);
+};
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+    let quizCards = document.querySelectorAll(".container-mid");
+    //Hide other cards
+    quizCards.forEach((card) => {
+        card.classList.add("hide");
+    });
+    //display current question card
+    quizCards[questionCount].classList.remove("hide");
+};
+
+//Quiz Creation
+function quizCreator() {
+    //randomly sort questions
+    quizArray.sort(() => Math.random() - 0.5);
+    //generate quiz
+    for (let i of quizArray) {
+        //randomly sort options
+        i.options.sort(() => Math.random() - 0.5);
+        //quiz card creation
+        let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
+        //question number
+        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        //question
+        let question_DIV = document.createElement("p");
+        question_DIV.classList.add("question");
+        question_DIV.innerHTML = i.question;
+        div.appendChild(question_DIV);
+        //options
+        div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+        quizContainer.appendChild(div);
     }
-)
+}
 
-const getAnswer = () => {
-    let ans;
-    allInputs.forEach(
-        (inputEl) => {
-            if (inputEl.checked) {
-                ans = inputEl.value;
-            }
+//Checker Function to check if option is correct or not
+function checker(userOption) {
+    let userSolution = userOption.innerText;
+    let question = document.getElementsByClassName("container-mid")[questionCount];
+    let options = question.querySelectorAll(".option-div");
+
+    // For marking the correct option
+    options.forEach((element) => {
+        if (element.innerText == quizArray[questionCount].correct) {
+            element.classList.add("correct");
         }
-    )
-    return ans;
+    });
+
+    // Mark the user's selected option as incorrect and change its color to red
+    userOption.classList.add("incorrect");
+
+    // Clear interval (stop timer)
+    clearInterval(countdown);
+
+    // Disable all options
+    options.forEach((element) => {
+        element.disabled = true;
+    });
+
+    // Increment the score if the user's answer was initially correct
+    if (userSolution == quizArray[questionCount].correct) {
+        scoreCount++;
+    }
 }
 
-const reset = () => {
-    allInputs.forEach(
-        (inputEl) => {
-            inputEl.checked = false;
-        }
-    )
+//initial setup
+function initial() {
+    quizContainer.innerHTML = "";
+    questionCount = 0;
+    scoreCount = 0;
+    count = 11;
+    clearInterval(countdown);
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
 }
 
-const quizEnd = () => {
-    // console.log(document.getElementsByClassName("container"));
-    document.getElementsByClassName("container")[0].innerHTML = `
-    <div class="col">
-        <h3 class="w-100"> Hii, you've scored ${correct} / ${total} </h3>
-    </div>
-`
+//when user click on start button
+startButton.addEventListener("click", () => {
+    startScreen.classList.add("hide");
+    displayContainer.classList.remove("hide");
+    initial();
+});
+
+//hide quiz and display start screen
+window.onload = () => {
+    startScreen.classList.remove("hide");
+    displayContainer.classList.add("hide");
+};
+
+function redirectToIndexPage() {
+    document.getElementById("exit").setAttribute("onclick", "window.location.href = '../index.html'");
 }
-loadQuestion(index);
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Close the current tab
+        window.close();
+    }
+});
