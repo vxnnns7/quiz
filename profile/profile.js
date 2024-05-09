@@ -57,6 +57,7 @@ function handleSubmit(event) {
 			}
 			else {
 				document.getElementById('success').innerText = 'Sign in Successfull :)'
+				window.location.href = "../index.html";
 			}
 		}
 	}
